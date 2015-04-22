@@ -1,0 +1,3 @@
+[submodule "pygments"]
+	path = pygments
+	url = git@github.com:dbrgn/pygments-mirror.git
