@@ -1,0 +1,41 @@
+% Abstract
+
+\pdfbookmark[1]{Abstract}{Abstract} % Bookmark name visible in a PDF viewer
+
+\begingroup
+\let\clearpage\relax
+\let\cleardoublepage\relax
+\let\cleardoublepage\relax
+
+\chapter*{Abstract} % Abstract name
+
+In the past, making data tangible was a complicated, manual process. Digital 3D
+representations of complex data have been around for quite a while, but they
+were always confined to the digital world. Mostly because it was impractical to
+convert a digital model to a physical representation.
+
+With the advent of cheap, affordable 3D printers, this changed. It is now easy
+to convert a purely digital model to a tangible, physical object. The missing
+piece in the process of making data tangible is the conversion of data to a
+digital 3D model.
+
+This thesis wants to solve that problem by providing an easy to use software
+library with ``batteries included'' that can convert arbitrary numeric data to
+3D models. The library -- named \tangible{} -- is written in Python and provides
+a set of predefined but customizable shapes, a few tools to preprocess data and
+a backend implementation for OpenSCAD, an open source programmatic CAD software.
+
+\tangible{} is implemented as a cross-compiler with a simple abstract syntax
+tree (AST), a set of predefined shapes that build on top of the AST and an
+interface that allows the creation of different code generation backends.
+
+The library is ready to use, well tested and thoroughly documented. It has been
+released under an open source license and is available online at
+\url{https://github.com/dbrgn/tangible}.
+
+\endgroup			
+
+\paragraph{Keywords:}\mbox{}\\
+\textit{\myKeywords}
+
+\vfill

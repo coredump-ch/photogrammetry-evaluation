@@ -1,0 +1,1 @@
+- In classicthesis-config.tex, uncomment line 177

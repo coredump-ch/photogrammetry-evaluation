@@ -1,0 +1,95 @@
+% Table of Contents - List of Tables/Figures/Listings and Acronyms
+
+\refstepcounter{dummy}
+
+\pdfbookmark[1]{\contentsname}{tableofcontents} % Bookmark name visible in a PDF viewer
+
+\setcounter{tocdepth}{2} % Depth of sections to include in the table of contents - currently up to subsections
+
+\setcounter{secnumdepth}{3} % Depth of sections to number in the text itself - currently up to subsubsections
+
+\manualmark
+\markboth{\spacedlowsmallcaps{\contentsname}}{\spacedlowsmallcaps{\contentsname}}
+\tableofcontents 
+\automark[section]{chapter}
+\renewcommand{\chaptermark}[1]{\markboth{\spacedlowsmallcaps{#1}}{\spacedlowsmallcaps{#1}}}
+\renewcommand{\sectionmark}[1]{\markright{\thesection\enspace\spacedlowsmallcaps{#1}}}
+
+\clearpage
+
+\begingroup 
+\let\clearpage\relax
+\let\cleardoublepage\relax
+\let\cleardoublepage\relax
+
+%----------------------------------------------------------------------------------------
+%	List of Figures
+%----------------------------------------------------------------------------------------
+
+\refstepcounter{dummy}
+\addcontentsline{toc}{chapter}{\listfigurename} % Uncomment if you would like the list of figures to appear in the table of contents
+%\pdfbookmark[1]{\listfigurename}{lof} % Bookmark name visible in a PDF viewer
+
+\listoffigures
+
+\vspace*{8ex}
+\newpage
+
+%----------------------------------------------------------------------------------------
+%	List of Tables
+%----------------------------------------------------------------------------------------
+
+%\refstepcounter{dummy}
+%\addcontentsline{toc}{chapter}{\listtablename} % Uncomment if you would like the list of tables to appear in the table of contents
+%\pdfbookmark[1]{\listtablename}{lot} % Bookmark name visible in a PDF viewer
+%
+%\listoftables
+%        
+%\vspace*{8ex}
+%\newpage
+    
+%----------------------------------------------------------------------------------------
+%	List of Listings
+%---------------------------------------------------------------------------------------- 
+
+%\refstepcounter{dummy}
+%\addcontentsline{toc}{chapter}{\lstlistlistingname} % Uncomment if you would like the list of listings to appear in the table of contents
+%\pdfbookmark[1]{\lstlistlistingname}{lol} % Bookmark name visible in a PDF viewer
+%
+%\lstlistoflistings 
+%
+%\vspace*{8ex}
+%\newpage
+       
+%----------------------------------------------------------------------------------------
+%	Acronyms
+%----------------------------------------------------------------------------------------
+
+\refstepcounter{dummy}
+\addcontentsline{toc}{chapter}{Acronyms} % Uncomment if you would like the acronyms to appear in the table of contents
+%\pdfbookmark[1]{Acronyms}{acronyms} % Bookmark name visible in a PDF viewer
+
+\markboth{\spacedlowsmallcaps{Acronyms}}{\spacedlowsmallcaps{Acronyms}}
+
+\chapter*{Acronyms}
+
+\begin{acronym}[UML]
+\acro{ABS}{Acrylonitrile Butadiene Styrene, a ``Lego-like'' filament used by FDM
+	3D printers}
+\acro{AST}{Abstract Syntax Tree, a logical representation of a computer program
+	used by compilers}
+\acro{CAD}{Computer-aided Design, the use of computer systems to assist in the
+	creation, modification, analysis, or optimization of a design}
+	\acro{CSV}{Comma-Separated Values, a file format to store tabular data}
+\acro{FDM}{Fused Deposition Modeling, a 3D printing technology}
+\acro{JSON}{JavaScript Object Notation, a lightweight data-interchange format}
+\acro{PEP}{Python Enhancement Proposal}
+\acro{PLA}{Polylactic Acid, a biodegradeable filament used by FDM 3D printers}
+\acro{STL}{STereoLithography, a file format for 3D models widely used in the
+	field of 3D printing}
+\acro{TDD}{Test Driven Development, a software development methodology}
+\end{acronym}  
+                   
+\endgroup
+
+\cleardoublepage
