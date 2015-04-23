@@ -10,14 +10,14 @@
 
 \manualmark
 \markboth{\spacedlowsmallcaps{\contentsname}}{\spacedlowsmallcaps{\contentsname}}
-\tableofcontents 
+\tableofcontents
 \automark[section]{chapter}
 \renewcommand{\chaptermark}[1]{\markboth{\spacedlowsmallcaps{#1}}{\spacedlowsmallcaps{#1}}}
 \renewcommand{\sectionmark}[1]{\markright{\thesection\enspace\spacedlowsmallcaps{#1}}}
 
 \clearpage
 
-\begingroup 
+\begingroup
 \let\clearpage\relax
 \let\cleardoublepage\relax
 \let\cleardoublepage\relax
@@ -44,23 +44,23 @@
 %\pdfbookmark[1]{\listtablename}{lot} % Bookmark name visible in a PDF viewer
 %
 %\listoftables
-%        
+%
 %\vspace*{8ex}
 %\newpage
-    
+
 %----------------------------------------------------------------------------------------
 %	List of Listings
-%---------------------------------------------------------------------------------------- 
+%----------------------------------------------------------------------------------------
 
 %\refstepcounter{dummy}
 %\addcontentsline{toc}{chapter}{\lstlistlistingname} % Uncomment if you would like the list of listings to appear in the table of contents
 %\pdfbookmark[1]{\lstlistlistingname}{lol} % Bookmark name visible in a PDF viewer
 %
-%\lstlistoflistings 
+%\lstlistoflistings
 %
 %\vspace*{8ex}
 %\newpage
-       
+
 %----------------------------------------------------------------------------------------
 %	Acronyms
 %----------------------------------------------------------------------------------------
@@ -71,13 +71,16 @@
 
 \markboth{\spacedlowsmallcaps{Acronyms}}{\spacedlowsmallcaps{Acronyms}}
 
-\chapter*{Acronyms}
+\chapter*{Glossar}
 
 \begin{acronym}[UML]
 	\acro{GIS}{Geografische Informationssysteme}
 	\acro{HSR}{Hochschule für Technik Rapperswil}
-\end{acronym}  
-                   
+	\acro{Orthofoto}{TODO}
+	\acro{Photogrammetrie}{TODO}
+	\acro{SFM}{Structure From Motion}
+\end{acronym}
+
 \endgroup
 
 \cleardoublepage

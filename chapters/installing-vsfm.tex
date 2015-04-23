@@ -1,25 +1,44 @@
-\chapter{Motivation}
+\chapter{Appendix A -- Installation VisualSFM}
 
-\label{ch:motivation}
-
-%----------------------------------------------------------------------------------------
-
-Data visualization is definitely nothing new. Neither is software to do
-statistical analysis or 3D model generation. And 3D printers have been around
-since 1984. But what happens if all these things are combined? By doing that,
-data visualization is taken to a physical level.
+\label{ch:installing-vsfm}
 
 %----------------------------------------------------------------------------------------
 
-\section{Data Visualization}\label{sec:datavis}
+Die folgende Anleitung beschreibt die Installation von
+VisualSFM\footnote{\url{http://ccwu.me/vsfm/}} (nachfolgend VSFM genannt), auf
+einem Computer mit Ubuntu\footnote{\url{http://www.ubuntu.com}} 14.04 LTS
+Betriebssystem und einer CUDA-fähigen nVidia Grafikkarte.
 
-\begin{quote}{\slshape
-The main goal of data visualization is its ability to \textbf{visualize data},
-communicating information clearly and effectively.} \\ \medskip
---- \defcitealias{friedman:2008}{Vitaly Friedman}\citetalias{friedman:2008} \citep{friedman:2008}
-\end{quote}
+%----------------------------------------------------------------------------------------
 
-Data visualization tries to make raw data more easily accessible. Changes in
-datapoints over time should be visible, relations between different datasets
-should become apparent, and at the same time the visualization should be easy to
-understand and pleasant to look at.
+\section{Einleitung}
+
+VSFM ist eine GUI-Applikation für 3D-Rekonstruktion mittels "<Structure from
+Motion"> (SFM) Technik. Das Projekt integriert eine grosszahl an
+Einzel-Komponenten:
+
+\begin{itemize}
+	\item SiftGPU: Eine SIFT\cite{lowe:2004}-Implementation für GPUs:
+		\url{http://www.cs.unc.edu/~ccwu/siftgpu/}
+	\item PMVS
+	\item CMVS
+	\item CMP-MVS
+	\item MVE
+	\item SURE
+	\item MeshRecon
+\end{itemize}
+
+\noindent Da für die meisten dieser Komponenten nicht als Ubuntu-Pakete
+verfügbar sind, müssen sie manuell kompiliert werden.
+
+%----------------------------------------------------------------------------------------
+
+\section{Abhängigkeiten}
+
+Dependencies beschreiben
+
+%----------------------------------------------------------------------------------------
+
+\section{Foobar}
+
+Bazqux
