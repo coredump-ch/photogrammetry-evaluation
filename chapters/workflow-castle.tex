@@ -63,7 +63,7 @@ hat aber gut funktioniert.
 	\label{img:gpstrace-mapnik}
 \end{figure}
 
-\subsection{Bildqualität}
+\subsection{Bildqualität}\label{workflow:erfassung:bildqualitaet}
 
 Die GoPro Kamera ist für Sportaktivitäten entwickelt worden und hat daher ein
 Weitwinkel-Objektiv ("<Fisheye">) eingebaut. Dies ist bestens geeignet um
@@ -94,5 +94,44 @@ welche besser für solche Aufgaben geeignet sind als die GoPro.
 	\item Nachteilig war jedoch der Schnee auf den Dächern. Er überdeckte die
 		Dachziegel und führte so bei der Feature-Erkennung zu schlechteren
 		Ergebnissen.
-	\item Die GoPro hat eine äusserst starke Verzerrung. 
+	\item Die GoPro hat eine äusserst starke Verzerrung. Eine Kamera mit
+		"<neutraler"> Linse wäre vermutlich besser geeignet.
+	\item Die JPEG Kompression ist möglicherweise störend. Eine Kamera mit
+		Unterstützung für unkomprimierte Bilder (RAW) würde möglicherweise bessere
+		Resultate liefern.
 \end{itemize}
+
+%----------------------------------------------------------------------------------------
+
+\section{Nachbearbeiten des Bildmaterials}
+
+Um wie im letzten Kapitel bereits
+besprochen\ref{workflow:erfassung:bildqualitaet}, haben wir unsere Bilder
+mithilfe von Photoshop Lightroom nachbearbeitet um die Linsenverzerrung
+herauszurechnen.
+
+Das Linsenprofil der GoPro 4 wird seit Photoshop Lightroom 5.7 (TODO: Verify)
+unterstützt. Die Korrektur kann für alle Bilder gleichzeitig im
+Batch-Korrektur-Modus erfolgen. Nach der Korrektur haben wir die Bilder mit
+JPEG-Qualitätsstufe 100 exportiert.
+
+Als Open Source Alternative zu Photoshop Lightroom wäre noch [TODO name
+programm] zu erwähnen, mit dem ebenfalls Bilder entzerrt werden können. Wir
+haben jedoch kein vorbereitetes Linsenprofil für die GoPro 4 gefunden und uns
+deshalb aus Zeitgründen für Lightroom entschieden. Ein Linsenprofil könnte mit
+mittlerem Aufwand jedoch selber erstellt werden. Anleitungen dazu gibt es
+online[TODO link].
+
+%----------------------------------------------------------------------------------------
+
+\section{Erster Versuch: Pix4D}
+
+Die erste von uns getestete Software war Pix4D\footnote{\url{TODO}}. Dieses
+Programm wurde von einem EFPL-Spinoff [TODO ?] in der Westschweiz entwickelt.
+Während die Vollversion relativ teuer ist (TODO Preis), gibt es eine Testversion
+mit eingeschränktem Funktionsumfang (keine GPU-Beschleunigung, kein Export),
+welche wir für unseren ersten Versuch genutzt haben.
+
+Da die Software damit wirbt, problemlos mit grossen Datenmengen umgehen zu
+können, haben wir direkt mal alle 2700 Fotos hineingeladen und einen
+Rekonstruktions-Prozess gestartet.
