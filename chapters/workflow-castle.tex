@@ -12,9 +12,9 @@ dieser Dokumentation.
 \section{Erfassung des Schlosses mit Kamera-Drohne}
 
 Um Fotos des Schlosses von allen Winkeln zu erstellen, braucht man ein
-ferngesteuertes Flugobjekt wie z.~B. einen Multikopter. In unserem Fall wurden
+ferngesteuertes Flugobjekt, wie \zb{} einen Multikopter. In unserem Fall wurden
 die Fotos von Michael Suter (\url{http://lightmoment.ch/}) erstellt, der einen
-Quadrokopter besitzt und daran freundlicherweise seine Piloten-Fähigkeiten unter
+Quadrokopter besitzt und damit freundlicherweise seine Piloten-Fähigkeiten unter
 Beweis gestellt hat.
 
 \subsection{Materialliste}
@@ -47,7 +47,15 @@ Zur Aufzeichnung der GPS-Koordinaten haben wir ein Smartphone mit einer GPS
 Tracking App auf dem Quadrokopter befestigt. Das ist nicht sehr professionell,
 hat aber gut funktioniert.
 
-\begin{figure}[p]
+Mit dem Quadrokopter sind wir dann während einer halben Stunde mehrmals um das
+Schloss herumgeflogen, um Fotos von jedem Winkel zu erstellen. Auch den Innehof
+haben wir mit dem Quadrokopter abgeflogen. Anschliessend sind wir noch zu Fuss
+mit der Kamera in der Hand dem Pfad neben dem Schloss gefolgt um auch gutes
+Bildmaterial von innerhalb des Tores zu erhalten.
+
+\vspace{1\baselineskip}
+
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{images/gpstrace_satellite.png}
 	\caption{GPS Trace des Quadrokopters während der Erfassung.\\Bildmaterial:
@@ -55,7 +63,7 @@ hat aber gut funktioniert.
 	\label{img:gpstrace-satellite}
 \end{figure}
 
-\begin{figure}[p]
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{images/gpstrace_mapnik.png}
 	\caption{GPS Trace des Quadrokopters während der Erfassung.\\Bildmaterial:
@@ -74,16 +82,25 @@ Ein weiterer Faktor ist die Kompression. Um viele Bilder auf der SD-Karte
 speichern zu können, werden die JPEG-Bilder stark komprimiert. Die daraus
 entstehenden JPEG-Artefakte können die Feature-Detection stören.
 
+\marginpar{Das Raw-Format, auch Rohdaten- format genannt, bezeichnet eine Familie
+von Dateiformaten für Digitalkameras, bei denen die Kamera die
+Bildinfor- mationen nach der Digitalisierung direkt ohne weitere Bearbeitung auf
+das Speichermedium schreibt. Bilder im Rohdatenformat werden gelegentlich auch
+als "<Digitales Negativ"> bezeichnet.}
+
 Idealerweise würde man daher zur Erfassung eine Spiegelreflex-Kamera mit
-neutralem 35mm Objektiv verwenden und alle Bilder im RAW-Format abspeichern.
+neutralem 35mm Objektiv verwenden und alle Bilder im Raw-Format abspeichern.
 Diese können dann mit entsprechender Software ohne verlustbehaftete Kompression
 in ein für die Photogrammetrie\-/Software nutzbares Format umgewandelt werden.
 
 In unserem Fall waren wir aber durch die Tragfähigkeit des Quadrokopters
 eingeschränkt und haben uns stattdessen dafür entschieden, die Bilder am
-Computer mithilfe eines Linsenprofils zu entzerren (TODO Referenz). Inzwischen
-gibt es allerdings sogar Photogrammetrie\-/Programme welche die GoPro
-Linsenprofile direkt unterstützen. Nichtsdestotrotz gibt es sicher Kameras
+Computer mithilfe eines Linsenprofils in Photoshop
+Lightroom\footnote{\url{http://www.photoshop.com/products/photoshoplightroom}}
+zu entzerren.
+
+Inzwischen gibt es zwar Photogrammetrie\-/Programme welche die GoPro
+Linsenprofile direkt unterstützen. Nichtsdestotrotz gibt es sicher Kameras,
 welche besser für solche Aufgaben geeignet sind als die GoPro.
 
 \subsection{Learnings}
@@ -94,44 +111,89 @@ welche besser für solche Aufgaben geeignet sind als die GoPro.
 	\item Nachteilig war jedoch der Schnee auf den Dächern. Er überdeckte die
 		Dachziegel und führte so bei der Feature-Erkennung zu schlechteren
 		Ergebnissen.
-	\item Die GoPro hat eine äusserst starke Verzerrung. Eine Kamera mit
-		"<neutraler"> Linse wäre vermutlich besser geeignet.
+	\item Die GoPro Kamera hat eine äusserst starke Linsen-Verzerrung. Eine Kamera
+		mit neutraler Linse wäre vermutlich besser geeignet.
 	\item Die JPEG Kompression ist möglicherweise störend. Eine Kamera mit
-		Unterstützung für unkomprimierte Bilder (RAW) würde möglicherweise bessere
-		Resultate liefern.
+		Unterstützung für unkomprimierte Bilder (Raw-Format) würde vielleicht
+		bessere Resultate liefern.
 \end{itemize}
 
 %----------------------------------------------------------------------------------------
 
 \section{Nachbearbeiten des Bildmaterials}
 
-Um wie im letzten Kapitel bereits
-besprochen\ref{workflow:erfassung:bildqualitaet}, haben wir unsere Bilder
-mithilfe von Photoshop Lightroom nachbearbeitet um die Linsenverzerrung
-herauszurechnen.
+Um wie im letzten Kapitel bereits besprochen, haben wir unsere Bilder mithilfe
+von Photoshop Lightroom nachbearbeitet um die Linsenverzerrung herauszurechnen.
 
-Das Linsenprofil der GoPro 4 wird seit Photoshop Lightroom 5.7 (TODO: Verify)
-unterstützt. Die Korrektur kann für alle Bilder gleichzeitig im
-Batch-Korrektur-Modus erfolgen. Nach der Korrektur haben wir die Bilder mit
-JPEG-Qualitätsstufe 100 exportiert.
+Das Linsenprofil der GoPro 4 wird seit Photoshop Lightroom 5.7 unterstützt. Die
+Korrektur kann für alle Bilder gleichzeitig im Batch-Korrektur-Modus erfolgen.
+Nach der Korrektur haben wir die Bilder mit JPEG-Qualitätsstufe 100 exportiert.
 
-Als Open Source Alternative zu Photoshop Lightroom wäre noch [TODO name
-programm] zu erwähnen, mit dem ebenfalls Bilder entzerrt werden können. Wir
-haben jedoch kein vorbereitetes Linsenprofil für die GoPro 4 gefunden und uns
-deshalb aus Zeitgründen für Lightroom entschieden. Ein Linsenprofil könnte mit
-mittlerem Aufwand jedoch selber erstellt werden. Anleitungen dazu gibt es
-online[TODO link].
+Als Open Source Alternative zu Photoshop Lightroom wäre noch
+Hugin\footnote{\url{http://hugin.sourceforge.net/}} zu erwähnen, mit dem
+ebenfalls Bilder entzerrt werden können. Wir haben jedoch kein vorbereitetes
+Linsenprofil für die GoPro 4 gefunden und uns deshalb aus Zeitgründen für
+Lightroom entschieden. Ein Linsenprofil könnte jedoch selber erstellt werden.
+Anleitungen dazu gibt es
+online\footnote{\url{http://hugin.sourceforge.net/tutorials/calibration/en.shtml}}.
+
+TODO: https://github.com/racerxdl/goprocorrect
 
 %----------------------------------------------------------------------------------------
 
 \section{Erster Versuch: Pix4D}
 
-Die erste von uns getestete Software war Pix4D\footnote{\url{TODO}}. Dieses
-Programm wurde von einem EFPL-Spinoff [TODO ?] in der Westschweiz entwickelt.
-Während die Vollversion relativ teuer ist (TODO Preis), gibt es eine Testversion
-mit eingeschränktem Funktionsumfang (keine GPU-Beschleunigung, kein Export),
-welche wir für unseren ersten Versuch genutzt haben.
+Die erste von uns getestete Software war
+Pix4D\footnote{\url{https://pix4d.com/}}. Dieses Programm wurde von einem
+EFPL-Spinoff in der Westschweiz entwickelt. Während die Vollversion relativ
+teuer ist (7'900 CHF), gibt es eine Testversion mit eingeschränktem
+Funktionsumfang (keine GPU-Beschleunigung, kein Export), welche wir für unseren
+ersten Versuch genutzt haben.
 
 Da die Software damit wirbt, problemlos mit grossen Datenmengen umgehen zu
 können, haben wir direkt mal alle 2700 Fotos hineingeladen und einen
 Rekonstruktions-Prozess gestartet.
+
+Die Rekonstruktion dauerte auf einem Intel Core i7-4790K mit 16 GiB RAM etwas
+über 52 Stunden. Das resultierende Modell war jedoch leider fehlerhaft. Wie man
+auf der Abbildung \ref{TODO} erkennen kann, wurde die Gasse neben dem Schloss
+der Schlossmauer entlang schräg nach oben geführt. Zudem war im endgültigen
+Ergebnis der Hauptturm doppelt vorhanden, einmal schräg versetzt.
+
+TODO bild
+
+Unsere Vermutung ist, dass wir zu viele Input-Daten verwendet hatten, so dass
+sich falsche Matches so weit summiert haben dass die Software sie als gültig
+betrachtet hat.
+
+TODO learnings: ev weniger bilder, ev sequentielle algorithmen
+
+%----------------------------------------------------------------------------------------
+
+\section{Zweiter Versuch: VisualSFM}
+
+TODO
+
+%----------------------------------------------------------------------------------------
+
+\section{Mesh-Generierung}
+
+TODO
+
+%----------------------------------------------------------------------------------------
+
+\section{Mesh-Bereinigung}
+
+TODO
+
+%----------------------------------------------------------------------------------------
+
+\section{3D-Druck}
+
+TODO
+
+%----------------------------------------------------------------------------------------
+
+\section{Resultate}
+
+TODO
