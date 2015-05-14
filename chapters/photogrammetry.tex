@@ -1,8 +1,8 @@
-\chapter{Photogrammetrie}
+\chapter{3D-Rekonstruktion}
 
-\section{Was ist Photogrammetrie}
+\section{Rekonstruktion mittels Photogrammetrie}
 
-TODO
+TODO Photogrammetrie. Ziel: Objekt -> 3D Printable
 
 %----------------------------------------------------------------------------------------
 
@@ -11,16 +11,24 @@ TODO
 Die ideale Ausgangsquelle für 3D-Rekonstruktion mittels Photogrammetrie sind
 eine hohe Anzahl qualitativ hochwertiger Fotos des Zielobjektes von allen
 Seiten. Jede Oberfläche sollte darin zu sehen sein. Die Bilder sollten sich
-überlappen, damit die Photogrammetrie-Software daraus die ursprüngliche
+überlappen, damit die Photogrammetrie\-/Software daraus die ursprüngliche
 Oberfläche errechnen kann. Idealerweise enthalten die Bilder auch
-GSNS[TODO:?]-Koordinaten. Damit kann der Rekonstruktions-Prozess beschleunigt
+GNSS-Koordinaten.
+\
+\marginpar{Bei der Georeferenzierung wird das dimensionslose 3D-Objekt mit
+geografischen Gegebenheiten abgeglichen. So können einerseits der
+Skalierungs\-/Faktor wie auch die Koordinaten im Raum ermittelt werden. Ein
+mögliches Beispiel dafür ist ein Luftbild, welches passgenau über eine Karte
+gelegt wird.}
+\
+Damit kann der Rekonstruktions-Prozess beschleunigt
 werden, zudem ist nur so eine einfache Georeferenzierung möglich.
 
 %----------------------------------------------------------------------------------------
 
-\section{Feature-Erkennung}
+\section{Feature-Erkennung} \label{photogrammetry:features}
 
-Als nächster Schritt wird das Bildmaterial in eine Photogrammetrie-Software
+Als nächster Schritt wird das Bildmaterial in eine Photogrammetrie\-/Software
 geladen. Diese versucht nun, auf den Bildern sogenannte "<Features"> zu
 erkennen. Features sind [TODO]
 
@@ -28,7 +36,74 @@ erkennen. Features sind [TODO]
 
 \section{Sparse Point Cloud}
 
-TODO: Übersetzen
-
 Die [TODO übersetzung], im Englischen "<Sparse Point Cloud"> genannt, ist eine
-dünn besetzte Punktwolke [WIP]
+dünn besetzte 3D-Punktwolke. Sie enthält die nötigsten Punkte aus der
+3D-Rekonstruktion und lässt bereits die Konturen des Objektes erahnen.
+
+Die [TODO] wird aus den im Schritt \ref{photogrammetry:features} erkannten
+Features generiert. Ein Feature das in mehreren Bildern erkannt wird, kann als
+Referenzpunkt im 3D-Raum genutzt werden und wird dann zu einem Punkt in der
+Punktwolke.
+
+%----------------------------------------------------------------------------------------
+
+\section{Dense Point Cloud}
+
+Nachdem die [TODO] generiert wurde, kann nun der leere Raum zwischen den
+3D-Punkten mithilfe des existierenden Bildmaterials und den Referenzpunkten
+eingefüllt werden. Als Ergebnis erhält man eine Punktwolke, die ein Vielfaches
+der Punkte aus der [TODO] enthält. Die Punkte speichern zudem Farbinformationen
+und möglicherweise weitere Metadaten.
+
+%----------------------------------------------------------------------------------------
+
+\section{Mesh}
+
+Aus der Dichten Punktwolke kann nun ein Objekt mit einer Oberfläche, das
+sogenannte "<Mesh"> generiert werden.
+
+\marginpar{Ein Mesh ist eine Oberfläche bestehend aus vielen aneinanderhängenden
+Polygonen, in der Regel Drei- oder Vierecken.}
+
+Um ein Mesh zu erzeugen, muss die Punktwolke zuerst gereinigt werden, indem
+nicht benötigte Punkte gelöscht werden. Diese Rausch-Reduzierung verhilft den
+Mesh-Rekonstruktions-Algorithmen zu besseren Ergebnissen.
+
+Zur Umwandlung einer Punktwolke in ein Mesh existieren diverse Algorithmen. Ein
+besonders gut geeigneter Algorithmus ist die von Microsoft Research im Jahr
+XXXX[TODO] entwickelte Poisson Reconstruction[TODO REF].
+
+TODO: Erläuterung Poisson Reconstruction
+
+%----------------------------------------------------------------------------------------
+
+\section{Solid}
+
+Damit ein Mesh druckbar wird, muss es in ein solides Objekt umgewandelt werden.
+Ein Mesh besteht nur aus einer Oberfläche, ein solides Objekt hinegegen ist
+"<wasserdicht"> und hat ein Volumen. Wichtig bei der Umwandlung ist auch, dass
+das Mesh "<manifold"> ist. Das bedeutet unter Anderem, dass alle Polygone nach
+Aussen zeigen und dass keine Vertizes [TODO: korrekt?] oder Kanten mehrfach
+vorhanden sind.
+
+Sind diese Voraussetzungen gegeben, kann ein Mesh mit geeigneter Software in
+einem Solid-Format wie STL[TODO ref] exportiert werden.
+
+%----------------------------------------------------------------------------------------
+
+\section{Slicing}
+
+Damit ein solides Objekt von einem 3D-Drucker gedruckt werden kann, muss es bei
+den meisten Modellen in Schichten bestehend aus sogenanntem G-Code umgewandelt
+werden. Dieser Prozess nennt sich "<Slicing"> und wird in der Regel von der dem
+3D-Drucker mitgelieferten Software erledigt.
+
+G-Code besteht aus [TODO description]
+
+Beim Slicing werden ideale Bahnen für den Druckkopf berechnet. Dabei werden
+Parameter wie Schichtdicke, Druckokpf-Durchmesser, Geschwindigkeit usw.
+berücksichtigt. Die meisten Slicer können auch die Generierung von Stützmaterial
+oder Haftungshilfen wie einem "<Raft"> oder "<Brim"> übernehmen.
+
+Der resultierende G-Code kann dann direkt an den 3D-Drucker gesendet werden. Der
+Kreis ist geschlossen, das gescannte Objekt entsteht nun auf der Druckplatte.
