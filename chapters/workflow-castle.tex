@@ -122,6 +122,8 @@ welche besser für solche Aufgaben geeignet sind als die GoPro.
 
 \section{Nachbearbeiten des Bildmaterials}
 
+\label{sec:image-correction}
+
 Um wie im letzten Kapitel bereits besprochen, haben wir unsere Bilder mithilfe
 von Photoshop Lightroom nachbearbeitet um die Linsenverzerrung herauszurechnen.
 
@@ -147,12 +149,14 @@ Die erste von uns getestete Software war
 Pix4D\footnote{\url{https://pix4d.com/}}. Dieses Programm wurde von einem
 EFPL-Spinoff in der Westschweiz entwickelt. Während die Vollversion relativ
 teuer ist (7'900 CHF), gibt es eine Testversion mit eingeschränktem
-Funktionsumfang (keine GPU-Beschleunigung, kein Export), welche wir für unseren
-ersten Versuch genutzt haben.
+Funktionsumfang (keine GPU\-/Beschleunigung, kein Export), welche wir für
+unseren ersten Versuch genutzt haben.
 
 Da die Software damit wirbt, problemlos mit grossen Datenmengen umgehen zu
 können, haben wir direkt mal alle 2700 Fotos hineingeladen und einen
-Rekonstruktions-Prozess gestartet.
+Rekonstruktions-Prozess gestartet. (Da Pix4D direkt Unterstützung für die GoPro
+Linse mitbringt, ist die Entzerrung übrigens optional. Wir haben in diesem
+Schritt darauf verzichtet.)
 
 Die Rekonstruktion dauerte auf einem Intel Core i7-4790K mit 16 GiB RAM etwas
 über 52 Stunden. Das resultierende Modell war jedoch leider fehlerhaft. Wie man
@@ -162,17 +166,69 @@ Ergebnis der Hauptturm doppelt vorhanden, einmal schräg versetzt.
 
 TODO bild
 
-Unsere Vermutung ist, dass wir zu viele Input-Daten verwendet hatten, so dass
-sich falsche Matches so weit summiert haben dass die Software sie als gültig
-betrachtet hat.
+Unsere Vermutung ist, dass wir zu viele (teilweise qualitativ nicht
+einwandfreie) Input-Daten verwendet hatten, so dass sich falsche Matches so weit
+summiert haben, dass die Software sie als gültig betrachtet hat. Wir konnten
+diese Hypothese aus Zeitgründen jedoch nicht verifizieren.
 
-TODO learnings: ev weniger bilder, ev sequentielle algorithmen
+\subsection{Learnings}
+
+\begin{itemize}
+	\item Vermutlich ist es besser, die Anzahl Bilder auf die qualitativ
+		hochwertigen zu reduzieren. Das senkt die Chance für fehlerhafte Matches.
+	\item Ein Rekonstruktions-Algorithmus mit Unterstützung für sequentielle
+		Bilder (oder Videos) könnte möglicherweise viel bessere Resultate liefern,
+		da wiederum die Chance von falschen Matches reduziert wird.
+\end{itemize}
 
 %----------------------------------------------------------------------------------------
 
 \section{Zweiter Versuch: VisualSFM}
 
-TODO
+Anstatt sich weiter mit Pix4D herumzuschlagen, haben wir als nächstes einen
+Versuch mit VisualSFM\footnote{\url{http://ccwu.me/vsfm/}} unter Linux
+gestartet. VisualSFM (Visual Structure From Motion, abgekürzt VSFM) wurde von
+Changchang Wu im Jahr 2011 im Rahmen einer TODO als Frontend für die Open Source
+Photogrammetrie-Tools PMVS, CMVS und CMP-MVS (und weitere)
+entwickelt\cite{wu:2011}\cite{wu:2015}. Der Quellcode ist quelloffen, allerdings
+darf die Software gemäss ihrer proprietären Lizenz ohne Kontaktaufnahme mit dem
+Autor nur zu akademischen und privaten Zwecken genutzt werden.
+
+\subsection{Installation}
+
+Die Installation von VSFM kann etwas herausfordernd sein, deshalb haben wir im
+\autoref{ch:installing-vsfm} die Installation unter Ubuntu 14.04 beschrieben.
+Alternativ ist unter Arch Linux die Installation dank Paketen im Arch User
+Repository\footnote{\url{https://aur.archlinux.org/}} relativ einfach möglich.
+
+\subsection{Konfiguration}
+
+TODO: konfigurationsdatei, gpu beschleunigung, etc
+
+\subsection{Vorgehen}
+
+Zuerst haben wir wie im \autoref{sec:image-correction} beschrieben die Bilder
+der GoPro einer Linsenkorrektur unterzogen. Anschliessend haben wir 120 Bilder
+für einen Testlauf ausgewählt und in VSFM geladen.
+
+TODO screenshot
+
+Mit einem Klick auf TODO wird die Feature-Erkennung gestartet.
+
+TODO screenshot
+
+Nun kann mit einem Klick auf TODO die Rekonstruktion der Sparse Point Cloud
+(siehe \autoref{photogrammetry:sparse-point-cloud}) beginnen. Man kann diese in
+Echtzeit überwachen. Das Resultat lässt bereits die Umrisse des Schlosses
+erahnen.
+
+TODO screenshot
+
+Als nächstes folgt die Schwerarbeit: Die Verdichtung der Punktwolke (siehe
+\autoref{photogrammetry:dense-point-cloud}).
+
+TODO screenshot
+
 
 %----------------------------------------------------------------------------------------
 
