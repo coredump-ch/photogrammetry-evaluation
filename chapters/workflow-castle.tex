@@ -11,6 +11,8 @@ dieser Dokumentation.
 
 \section{Erfassung des Schlosses mit Kamera-Drohne}
 
+\label{workflow:drone}
+
 Um Fotos des Schlosses von allen Winkeln zu erstellen, braucht man ein
 ferngesteuertes Flugobjekt, wie \zb{} einen Multikopter. In unserem Fall wurden
 die Fotos von Michael Suter (\url{http://lightmoment.ch/}) erstellt, der einen
@@ -185,7 +187,7 @@ diese Hypothese aus Zeitgründen jedoch nicht verifizieren.
 
 \section{Zweiter Versuch: VisualSFM}
 
-Anstatt sich weiter mit Pix4D herumzuschlagen, haben wir als nächstes einen
+Anstatt uns weiter mit Pix4D herumzuschlagen, haben wir als nächstes einen
 Versuch mit VisualSFM\footnote{\url{http://ccwu.me/vsfm/}} unter Linux
 gestartet. VisualSFM (Visual Structure From Motion, abgekürzt VSFM) wurde von
 Changchang Wu im Jahr 2011 im Rahmen einer TODO als Frontend für die Open Source
@@ -199,7 +201,8 @@ Autor nur zu akademischen und privaten Zwecken genutzt werden.
 Die Installation von VSFM kann etwas herausfordernd sein, deshalb haben wir im
 \autoref{ch:installing-vsfm} die Installation unter Ubuntu 14.04 beschrieben.
 Alternativ ist unter Arch Linux die Installation dank Paketen im Arch User
-Repository\footnote{\url{https://aur.archlinux.org/}} relativ einfach möglich.
+Repository\footnote{\url{https://aur.archlinux.org/packages/vsfm/}} relativ
+einfach möglich.
 
 \subsection{Konfiguration}
 
@@ -207,9 +210,10 @@ TODO: konfigurationsdatei, gpu beschleunigung, etc
 
 \subsection{Vorgehen}
 
-Zuerst haben wir wie im \autoref{sec:image-correction} beschrieben die Bilder
-der GoPro einer Linsenkorrektur unterzogen. Anschliessend haben wir 120 Bilder
-für einen Testlauf ausgewählt und in VSFM geladen.
+Zuerst haben wir wie im \autoref{sec:image-correction} beschrieben die Fotos
+einer Linsenkorrektur unterzogen. Anschliessend haben wir 120 Bilder für einen
+Testlauf ausgewählt und in VSFM geladen. Bei der Auwahl haben wir darauf
+geachtet, dass jeder Teil des Schlosses darin vertreten ist.
 
 TODO screenshot
 
@@ -240,7 +244,24 @@ TODO
 
 \section{Mesh-Bereinigung}
 
-TODO
+\label{workflow:mesh-cleanup}
+
+Das Mesh ist nun bereit, sieht allerdings noch roh aus und weist viele
+Unschönheiten auf. Diese müssen nun von Hand korrigiert werden.
+
+Bei diesem Prozess wurden wir zu Beginn von der Firma Drei-De in Rapperswil
+unterstützt. Sie übernahmen das initiale Mesh-Rework.
+
+Anschliessend haben wir die letzten Korrekturen mit der Software
+Blender\footnote{\url{TODO BLENDER URL}} durchgeführt. Dabei haben wir primär
+mit den Modellier-Werkzeugen gearbeitet:
+
+TODO Screenshots und Erklaerungen
+
+Das fertige Mesh kann nun unter [TODO welches menu?] ins STL Format exportiert
+werden.
+
+TODO Screenshot
 
 %----------------------------------------------------------------------------------------
 
