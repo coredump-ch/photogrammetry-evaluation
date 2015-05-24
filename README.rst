@@ -5,8 +5,6 @@ WIP
 
 To build:
 
-```
-$ git submodule init
-$ git submodule update
-$ make
-```
+    $ git submodule init
+    $ git submodule update
+    $ make
