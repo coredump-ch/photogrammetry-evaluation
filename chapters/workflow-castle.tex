@@ -192,14 +192,20 @@ diese Hypothese aus Zeitgründen jedoch nicht verifizieren.
 
 \section{Zweiter Versuch: VisualSFM}
 
-Anstatt uns weiter mit Pix4D herumzuschlagen, haben wir als nächstes einen
-Versuch mit VisualSFM\footnote{\url{http://ccwu.me/vsfm/}} unter Linux
-gestartet. VisualSFM (Visual Structure From Motion, abgekürzt VSFM) wurde von
-Changchang Wu im Jahr 2011 im Rahmen einer TODO als Frontend für die Open Source
-Photogrammetrie-Tools PMVS, CMVS und CMP-MVS (und weitere)
-entwickelt\cite{wu:2011}\cite{wu:2015}. Der Quellcode ist quelloffen, allerdings
-darf die Software gemäss ihrer proprietären Lizenz ohne Kontaktaufnahme mit dem
-Autor nur zu akademischen und privaten Zwecken genutzt werden.
+Anstatt uns weiter mit Pix4D herumzuschlagen, haben wir den zweiten Versuch mit
+VisualSFM\footnote{\url{http://ccwu.me/vsfm/}}\cite{wu:2011}\cite{wu:2015} unter
+Linux gestartet. VisualSFM (Visual Structure From Motion, abgekürzt VSFM) wurde
+von Changchang Wu im Jahr 2011 im Rahmen seines Postdoc Researches als Frontend
+für die Photogrammetrie-Tools SiftGPU\cite{siftgpu07wu}, Multicore Bundle
+Adjustment\cite{wu2011multicore}, CMVS\cite{Furu:2010},
+PMVS\cite{Furu:2010:PMVS}, CMPMVS\cite{jancosek2011multi}, MVE\cite{FG-GCH2014},
+SURE\cite{rothermel2012sure}, MeshRecon (und weitere) entwickelt. Der Quellcode
+ist quelloffen, allerdings darf die Software gemäss ihrer proprietären Lizenz
+ohne Kontaktaufnahme mit dem Autor nur zu akademischen und nonkommerziellen
+Zwecken genutzt werden. Die verwendeten Komponenten sind teilweise unter einer
+freien Lizenz\footnote{\url{https://www.fsf.org/licensing/}} veröffentlicht,
+teilweise wie VSFM selbst nur für akademische und nonkommerzielle Zwecke
+nutzbar.
 
 \subsection{Installation}
 
@@ -215,14 +221,27 @@ TODO: konfigurationsdatei, gpu beschleunigung, etc
 
 \subsection{Vorgehen}
 
+Beim Vorgehen haben wir uns an einem gut gemachten Tutorial auf YouTube
+orientiert: \url{https://youtu.be/V4iBb_j6k_g}
+
 Zuerst haben wir wie im \autoref{sec:image-correction} beschrieben die Fotos
-einer Linsenkorrektur unterzogen. Anschliessend haben wir 120 Bilder für einen
+einer Linsenkorrektur unterzogen. Anschliessend haben wir 571 Bilder für einen
 Testlauf ausgewählt und in VSFM geladen. Bei der Auwahl haben wir darauf
 geachtet, dass jeder Teil des Schlosses darin vertreten ist.
 
-TODO screenshot
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{images/vsfm_thumbnails.png}
+	\caption{Thumbnails in VSFM}
+	\label{img:vsm_thumbnails}
+\end{figure}
 
-Mit einem Klick auf TODO wird die Feature-Erkennung gestartet.
+\noindent Dann muss man die CUDA-Unterstützung unter \texttt{Tools > Enable GPU
+> Match using CUDA} aktivieren.
+
+Mit einem Klick auf "<Compute Missing Matches">
+\includegraphics[scale=0.75]{images/vsfm_icon_compute} wird die
+Feature-Erkennung gestartet.
 
 TODO screenshot
 
