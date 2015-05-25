@@ -162,11 +162,16 @@ Schritt darauf verzichtet.)
 
 Die Rekonstruktion dauerte auf einem Intel Core i7-4790K mit 16 GiB RAM etwas
 über 52 Stunden. Das resultierende Modell war jedoch leider fehlerhaft. Wie man
-auf der Abbildung \ref{TODO} erkennen kann, wurde die Gasse neben dem Schloss
+auf der \autoref{img:pix4d} erkennen kann, wurde die Gasse neben dem Schloss
 der Schlossmauer entlang schräg nach oben geführt. Zudem war im endgültigen
 Ergebnis der Hauptturm doppelt vorhanden, einmal schräg versetzt.
 
-TODO bild
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{images/pix4d.png}
+	\caption{Sparse Point Cloud in Pix4D}
+	\label{img:pix4d}
+\end{figure}
 
 Unsere Vermutung ist, dass wir zu viele (teilweise qualitativ nicht
 einwandfreie) Input-Daten verwendet hatten, so dass sich falsche Matches so weit
