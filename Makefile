@@ -23,5 +23,8 @@ mupdf:
 zathura:
 	zathura $(TARGET) &
 
+evince:
+	evince $(TARGET) &
+
 
 # vim: set tabstop=4 shiftwidth=4 noexpandtab:
