@@ -7,38 +7,163 @@
 Die folgende Anleitung beschreibt die Installation von
 VisualSFM\footnote{\url{http://ccwu.me/vsfm/}} (nachfolgend VSFM genannt), auf
 einem Computer mit Ubuntu\footnote{\url{http://www.ubuntu.com}} 14.04 LTS
-Betriebssystem und einer CUDA-fähigen nVidia Grafikkarte.
+Betriebssystem und einer CUDA-fähigen nVidia Grafikkarte. CUDA-Unterstützung ist 
+optional, aber empfohlen.
 
 %----------------------------------------------------------------------------------------
 
 \section{Einleitung}
 
 VSFM ist eine GUI-Applikation für 3D-Rekonstruktion mittels "<Structure from
-Motion"> (SFM) Technik. Das Projekt integriert eine grosszahl an
-Einzel-Komponenten:
+Motion"> (SFM) Technik. Das Projekt integriert viele Einzelkomponenten welche
+meist von Universitäten entwickelt wurden.
+
+\subsection{Abhängigkeiten}
+
+Für den VSFM 3D-Reconstruction Prozess haben wir folgende Bibliotheken verwendet:
 
 \begin{itemize}
-	\item SiftGPU: Eine SIFT\cite{lowe:2004}-Implementation für GPUs:
-		\url{http://www.cs.unc.edu/~ccwu/siftgpu/}
-	\item PMVS
-	\item CMVS
-	\item CMP-MVS
-	\item MVE
-	\item SURE
-	\item MeshRecon
+	\item SiftGPU\footnote{\url{http://www.cs.unc.edu/~ccwu/siftgpu/}}:
+		Eine SIFT\cite{lowe:2004}-Implementation für GPUs.
+	\item PMVS (Patch-based Multi-view Stereo)\footnote{\url{http://www.di.ens.fr/pmvs/}}:
+		Erstellung einer Point-Cloud aus Kamerabildern.
+		Das Resultat enthält gemeinsame Features als
+		Punkte mit an der Kamera ausgerichteten Normalen.
+	\item CMVS (Clustering Views for Multi-view Stereo)\footnote{\url{http://www.di.ens.fr/cmvs/}}:
+		Ergänzt PMVS um Clustering für schnellere Resultate.
+	\item PBA\footnote{\url{http://grail.cs.washington.edu/projects/mcba/}}:
+		Bündelblockausgleichung (Englisch: Bundle Adjustment) auf mehreren CPUs.
 \end{itemize}
 
 \noindent Da für die meisten dieser Komponenten nicht als Ubuntu-Pakete
 verfügbar sind, müssen sie manuell kompiliert werden.
 
+\subsection{Alternativen}
+
+VSFM arbeitet mit vielen alternativen SFM-Programmen zusammen oder kann Teile davon selbst
+benutzen. Sie sind jedoch nicht direkt für den Betrieb von VSFM nötig und wurden
+nicht näher betrachtet:
+
+\begin{itemize}
+	\item CMP-MVS\footnote{\url{http://ptak.felk.cvut.cz/sfmservice/websfm.pl?menu=cmpmvs}}
+	\item MVE\footnote{\url{http://www.gris.informatik.tu-darmstadt.de/projects/multiview-environment/}}
+	\item SURE\footnote{\url{http://www.ifp.uni-stuttgart.de/publications/software/sure/index.en.html}}
+	\item MeshRecon\footnote{\url{http://www-scf.usc.edu/~zkang/software.html}}
+\end{itemize}
+
 %----------------------------------------------------------------------------------------
 
-\section{Abhängigkeiten}
+\section{Installation}
 
-Dependencies beschreiben
+Mit dem folgenden Installationsscript kann VSFM automatisch auf einem Ubuntu 14.04
+installiert werden.
 
-%----------------------------------------------------------------------------------------
+In dieser Version werden alle Abhängigkeiten automatisch aus dem
+Internet heruntergeladen. Sie sind ebenfalls auf der (TODO: CD/Stick/Internet) vorhanden 
+für den Fall, dass die Ressourcen nicht mehr online verfügbar sind. Es wird empfohlen
+nicht das ganze Script auf einmal auszuführen, sondern es Schritt für Schritt durchzugehen.
+Möglicherweise haben sich Systemvoraussetzungen in der Zwischenzeit geändert
+(z.B. nVidia-Treiber).
 
-\section{Foobar}
+\begin{minted}[bgcolor=tango-bg,frame=lines,framesep=2mm,samepage=true,fontsize=\footnotesize]{bash} 
+# Whole 2D to 3D reconstruction toolchain setup for Ubuntu 14.04 64bit
+# Sources: 
+# - http://ccwu.me/vsfm/install.html#linux
+# - http://www.10flow.com/2012/08/15/
+# - http://www.di.ens.fr/cmvs/
 
-Bazqux
+# update the system
+sudo apt-get update && sudo apt-get upgrade
+sudo apt-get install build-essential
+
+# install a proprietary nvidia driver
+sudo apt-get install nvidia-331-updates
+
+# prepare dependencies of vsfm, siftgpu, mulicore_bundle_adjustment, 
+#                         pmvs-2, cmvs, graclus
+sudo apt-get install libgtk2.0-dev libglew-dev glew-utils libdevil-dev\
+                     libboost-all-dev libatlas-cpp-0.6-dev libatlas-dev\
+                     imagemagick libatlas3gf-base libcminpack-dev\
+                     libgfortran3 libmetis-edf-dev libparmetis-dev \
+                     freeglut3-dev libgsl0-dev
+sudo apt-get install nvidia-cuda-toolkit
+
+# compile vsfm (framework for 3d reconstruction from motion)
+wget http://ccwu.me/vsfm/download/VisualSFM_linux_64bit.zip
+unzip VisualSFM_linux_64bit.zip
+cd vsfm
+make 
+cd ..
+
+# compile SiftGPU (feature detection with GPU)
+wget -O SiftGPU.zip http://wwwx.cs.unc.edu/~ccwu/cgi-bin/siftgpu.cgi
+unzip SiftGPU.zip
+cd SiftGPU
+sudo ln -s /usr/lib/nvidia-cuda-toolkit /usr/local/cuda
+make
+cd ..
+cp SiftGPU/bin/libsiftgpu.so vsfm/bin/
+
+# pba (fast bundle adjustments library)
+wget http://grail.cs.washington.edu/projects/mcba/pba_v1.0.5.zip 
+unzip pba_v1.0.5.zip
+cd pba
+sed -i.bak 's|CUDA_INSTALL_PATH = /usr/local/cuda|CUDA_INSTALL_PATH \
+           = /usr/lib/nvidia-cuda-toolkit|g' ./makefile
+make
+cd ..
+cp pba/bin/libpba.so vsfm/bin/
+
+# pmvs-2 (builds a point cloud of features seen in multiple views)
+sudo apt-get install liblapack-dev
+wget http://www.di.ens.fr/pmvs/pmvs-2-fix0.tar.gz
+tar xf pmvs-2-fix0.tar.gz
+cd pmvs-2/program/main/
+make clean
+
+wget http://www.10flow.com/wp-content/uploads/2012/08/mylapack.o.tar.gz
+tar xf mylapack.o.tar.gz
+make depend
+make
+cd ../../../
+\end{minted}
+
+\begin{minted}[bgcolor=tango-bg,frame=lines,framesep=2mm,samepage=true,fontsize=\footnotesize]{bash} 
+# graclus (fast graph clustering library)
+wget http://www.cs.utexas.edu/users/dml/Software/graclus1.2.tar.gz
+tar xf graclus1.2.tar.gz
+cd graclus1.2/
+sed -i.bak 's|COPTIONS = -DNUMBITS=32|COPTIONS \
+           = -DNUMBITS=64|g' Makefile.in
+make
+cd ..
+
+# cmvs (cluster pmvs output)
+wget http://www.di.ens.fr/cmvs/cmvs-fix2.tar.gz
+tar xf cmvs-fix2.tar.gz
+cp pmvs-2/program/main/mylapack.o cmvs/program/main/
+sed -i.bak '1s/^/#include <vector>\n#include <numeric>\n/' \
+           cmvs/program/base/cmvs/bundle.cc
+sed -i.bak '1s/^/#include <stdlib.h>\n/' cmvs/program/main/genOption.cc
+sed -i.bak 's|YOUR_INCLUDE_METIS_PATH =|YOUR_INCLUDE_METIS_PATH \
+           = -I'$(pwd)'/graclus1.2/metisLib|g' \
+           cmvs/program/main/Makefile
+sed -i.bak 's|YOUR_LDLIB_PATH =|YOUR_LDLIB_PATH \
+           = -L'$(pwd)'/graclus1.2|g' cmvs/program/main/Makefile
+sed -i.bak 's/^Your\ /# Your /g' cmvs/program/main/Makefile
+cd cmvs/program/main
+make
+
+cp cmvs ../../../vsfm/bin
+cp pmvs2 ../../../vsfm/bin
+cp genOption ../../../vsfm/bin
+
+# set export paths
+echo "" >> ~/.bashrc
+echo export PATH=\$PATH:$(pwd)/vsfm/bin >> ~/.bashrc
+echo export LD_LIBRARY_PATH=\$LD_LIBRARY_PATH:$(pwd)/vsfm/bin \
+            >> ~/.bashrc
+\end{minted}
+
+
+
