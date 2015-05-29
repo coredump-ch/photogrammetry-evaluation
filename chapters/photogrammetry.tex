@@ -24,14 +24,14 @@ Seiten. Jede Oberfläche sollte darin zu sehen sein. Die Bilder sollten sich
 Oberfläche errechnen kann. Idealerweise enthalten die Bilder auch
 GNSS-Koordinaten.
 %
-\marginpar{Bei der Georeferenzierung wird das dimensionslose 3D-Objekt mit
-geografischen Gegebenheiten abgeglichen. So können einerseits der
-Skalierungs\-/Faktor wie auch die Koordinaten im Raum ermittelt werden. Ein
+\marginpar{Bei der Georeferenzierung werden Daten in Bezug zu
+geografischen Gegebenheiten gesetzt. So können Skalierungs\-/Faktoren
+oder Koordinaten einzelner Datenpunkte im Raum ermittelt werden. Ein
 mögliches Beispiel dafür ist ein Luftbild, welches passgenau über eine Karte
 gelegt wird.}
 %
-Damit kann der Rekonstruktions-Prozess beschleunigt werden, zudem ist so eine
-einfache Georeferenzierung möglich.
+Damit ist eine einfache Georeferenzierung möglich und der Rekonstruktions-Prozess
+kann beschleunigt werden.
 
 %----------------------------------------------------------------------------------------
 
@@ -41,7 +41,7 @@ Als nächster Schritt wird das Bildmaterial in eine Photogrammetrie\-/Software
 geladen. Diese versucht nun, auf den Bildern sogenannte "<Features"> zu
 erkennen. Features (Deutsch: Merkmale) sind mathematisch interessante Stellen
 eines Bildes, welche genutzt werden können um die Dimensionen eines Objektes
-unabhängig von dessen Skalierung oder Verzerrung extrahieren zu können.
+unabhängig von dessen Skalierung oder Verzerrung zu extrahieren.
 
 Die Features sind eine wichtige Grundlage für die weitere Verarbeitung im
 Rekonstruktions-Prozess.
@@ -86,14 +86,14 @@ Aus der dicht besetzten Punktwolke kann nun ein Objekt mit einer Oberfläche, da
 sogenannte "<Mesh">, generiert werden. Ein Mesh ist eine Oberfläche bestehend
 aus vielen aneinanderhängenden Polygonen, in der Regel Drei- oder Vierecken.
 
-Um ein Mesh zu erzeugen, muss die Punktwolke zuerst bereinigt werden, indem
-nicht benötigte Punkte gelöscht werden. Diese Rausch-Reduzierung verhilft den
-Mesh-Rekonstruktions-Algorithmen zu besseren Ergebnissen. (Möglicherweise könnte
-diese Tätigkeit durch Algorithmen erledigt werden, in unserem Fall haben wir die
-Bereinigung manuell durchgeführt.)
-
-Zur Umwandlung einer Punktwolke in ein Mesh existieren diverse Algorithmen. Ein
-besonders gut geeigneter Algorithmus ist die von Microsoft Research im Jahr
+Die Punktwolke enthält in der Regel zu viele und auch falsche Punkte. Um daraus
+ein Mesh zu erzeugen, muss die Punktwolke zuerst bereinigt werden. Dies geschieht
+indem nicht benötigte Punkte gelöscht und Punktgruppen zusammengefasst werden.
+Diese Rausch-Reduzierung verhilft den Mesh-Rekonstruktions-Algorithmen zu besseren
+Ergebnissen. In unserem Fall wurde die Bereinigung von Hand durchgeführt.
+Zur Umwandlung einer bereinigten Punktwolke in ein Mesh existieren ebenfalls
+diverse Algorithmen.
+Ein besonders gut geeigneter Algorithmus ist die von Microsoft Research im Jahr
 2006 entwickelte "<Poisson Surface Reconstruction">\cite{kazhdan:2006}.
 
 %----------------------------------------------------------------------------------------
@@ -128,7 +128,7 @@ Das nahezu universell dafür benutzte Datenformat ist der sogenannte
 G-Code\footnote{\url{https://en.wikipedia.org/wiki/G-code}}.
 
 Beim Slicing werden ideale Bahnen für den Druckkopf berechnet. Dabei werden
-Parameter wie Schichtdicke, Druckokpf-Durchmesser, Geschwindigkeit usw.
+Parameter wie Schichtdicke, Druckkopf-Durchmesser, Geschwindigkeit usw.
 berücksichtigt. Die meisten Slicer ermöglichen auch die Generierung von
 Stützmaterial oder Haftungshilfen wie einem "<Raft"> oder "<Brim">.
 
