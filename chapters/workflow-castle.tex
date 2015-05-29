@@ -46,11 +46,10 @@ TBS Discovery mit einem Gimbal (gyroskopische Mehrachsen-Stabilisierung)
 gegeben.
 
 Zur Aufzeichnung der GPS-Koordinaten haben wir ein Smartphone mit einer GPS
-Tracking App auf dem Quadrokopter befestigt. Das ist nicht sehr professionell,
-hat aber gut funktioniert.
+Tracking App auf dem Quadrokopter befestigt.
 
 Mit dem Quadrokopter sind wir dann während einer halben Stunde mehrmals um das
-Schloss herumgeflogen, um Fotos von jedem Winkel zu erstellen. Auch den Innehof
+Schloss herumgeflogen um Fotos von jedem Winkel zu erstellen. Auch den Innehof
 haben wir mit dem Quadrokopter abgeflogen. Anschliessend sind wir noch zu Fuss
 mit der Kamera in der Hand dem Pfad neben dem Schloss gefolgt um auch gutes
 Bildmaterial von innerhalb des Tores zu erhalten.
@@ -149,7 +148,7 @@ TODO: https://github.com/racerxdl/goprocorrect
 
 Die erste von uns getestete Software war
 Pix4D\footnote{\url{https://pix4d.com/}}. Dieses Programm wurde von einem
-EFPL-Spinoff in der Westschweiz entwickelt. Während die Vollversion relativ
+EPFL-Spinoff in der Westschweiz entwickelt. Während die Vollversion relativ
 teuer ist (7'900 CHF), gibt es eine Testversion mit eingeschränktem
 Funktionsumfang (keine GPU\-/Beschleunigung, kein Export), welche wir für
 unseren ersten Versuch genutzt haben.
@@ -186,6 +185,10 @@ diese Hypothese aus Zeitgründen jedoch nicht verifizieren.
 	\item Ein Rekonstruktions-Algorithmus mit Unterstützung für sequentielle
 		Bilder (oder Videos) könnte möglicherweise viel bessere Resultate liefern,
 		da wiederum die Chance von falschen Matches reduziert wird.
+	\item Möglicherweise war der zeitliche Abstand zwischen den Einzelbildern
+		zu gross. Bei der Analyse zeitnaher Bilder würden wichtige Features
+		stärker gewichtet, was eine Point-Cloud mit prozentual weniger
+		falschen Punkten ergäbe.
 \end{itemize}
 
 %----------------------------------------------------------------------------------------
@@ -236,8 +239,7 @@ geachtet, dass jeder Teil des Schlosses darin vertreten ist.
 	\label{img:vsm_thumbnails}
 \end{figure}
 
-\noindent Dann muss man die CUDA-Unterstützung unter \texttt{Tools > Enable GPU
-> Match using CUDA} aktivieren.
+\noindent Für schnellere Resultate kann man optional die CUDA-Unterstützung unter \texttt{Tools > Enable GPU > Match using CUDA} aktivieren.
 
 Mit einem Klick auf "<Compute Missing Matches">
 \includegraphics[scale=0.75]{images/vsfm_icon_compute} wird die
@@ -271,13 +273,14 @@ TODO
 \label{workflow:mesh-cleanup}
 
 Das Mesh ist nun bereit, sieht allerdings noch roh aus und weist viele
-Unschönheiten auf. Diese müssen nun von Hand korrigiert werden.
+Unschönheiten auf. Diese müssen nun korrigiert werden. In unserem Fall geschah
+dies von Hand.
 
 Bei diesem Prozess wurden wir zu Beginn von der Firma Drei-De in Rapperswil
 unterstützt. Sie übernahmen das initiale Mesh-Rework.
 
 Anschliessend haben wir die letzten Korrekturen mit der Software
-Blender\footnote{\url{TODO BLENDER URL}} durchgeführt. Dabei haben wir primär
+Blender\footnote{\url{https://www.blender.org/}} durchgeführt. Dabei haben wir primär
 mit den Modellier-Werkzeugen gearbeitet:
 
 TODO Screenshots und Erklaerungen
