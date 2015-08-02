@@ -19,10 +19,7 @@ physikalisches Objekt digitalisieren und anschliessend wieder mit einem
 
 Die ideale Ausgangsquelle für 3D-Rekonstruktion mittels Photogrammetrie ist
 eine hohe Anzahl qualitativ hochwertiger Fotos des Zielobjektes von allen
-Seiten. Jede Oberfläche sollte darin zu sehen sein. Die Bilder sollten sich
-überlappen, damit die Photogrammetrie\-/Software daraus die ursprüngliche
-Oberfläche errechnen kann. Idealerweise enthalten die Bilder auch
-GNSS-Koordinaten.
+Seiten. Jede Oberfläche sollte darin zu sehen sein.
 %
 \marginpar{Bei der Georeferenzierung werden Daten in Bezug zu
 geografischen Gegebenheiten gesetzt. So können Skalierungs\-/Faktoren
@@ -30,8 +27,10 @@ oder Koordinaten einzelner Datenpunkte im Raum ermittelt werden. Ein
 mögliches Beispiel dafür ist ein Luftbild, welches passgenau über eine Karte
 gelegt wird.}
 %
-Damit ist eine einfache Georeferenzierung möglich und der Rekonstruktions-Prozess
-kann beschleunigt werden.
+Die Bilder sollten sich überlappen, damit die Photogrammetrie\-/Software daraus
+die ursprüngliche Oberfläche errechnen kann. Idealerweise enthalten die Bilder
+auch GNSS-Koordinaten. Damit ist eine einfache Georeferenzierung möglich und
+der Rekonstruktions-Prozess kann beschleunigt werden.
 
 %----------------------------------------------------------------------------------------
 
@@ -40,7 +39,7 @@ kann beschleunigt werden.
 Als nächster Schritt wird das Bildmaterial in eine Photogrammetrie\-/Software
 geladen. Diese versucht nun, auf den Bildern sogenannte "<Features"> zu
 erkennen. Features (Deutsch: Merkmale) sind mathematisch interessante Stellen
-eines Bildes, welche genutzt werden können um die Dimensionen eines Objektes
+eines Bildes, welche genutzt werden können, um die Dimensionen eines Objektes
 unabhängig von dessen Skalierung oder Verzerrung zu extrahieren.
 
 Die Features sind eine wichtige Grundlage für die weitere Verarbeitung im
@@ -58,7 +57,7 @@ besteht aus Punkten im 3D-Raum. Sie enthält die nötigsten Punkte aus der
 stellt jedoch noch keine vollständige Rekonstruktion des Objektes dar.
 
 Die Punktwolke wird aus den im Schritt \ref{photogrammetry:features} erkannten
-Features generiert. Ein Feature das in mehreren Bildern erkannt wird, kann als
+Features generiert. Ein Feature, das in mehreren Bildern erkannt wird, kann als
 gemeinsamer Referenzpunkt im 3D-Raum genutzt werden und wird dann zu einem Punkt
 in der Punktwolke.
 
@@ -87,14 +86,16 @@ sogenannte "<Mesh">, generiert werden. Ein Mesh ist eine Oberfläche bestehend
 aus vielen aneinanderhängenden Polygonen, in der Regel Drei- oder Vierecken.
 
 Die Punktwolke enthält in der Regel zu viele und auch falsche Punkte. Um daraus
-ein Mesh zu erzeugen, muss die Punktwolke zuerst bereinigt werden. Dies geschieht
-indem nicht benötigte Punkte gelöscht und Punktgruppen zusammengefasst werden.
-Diese Rausch-Reduzierung verhilft den Mesh-Rekonstruktions-Algorithmen zu besseren
-Ergebnissen. In unserem Fall wurde die Bereinigung von Hand durchgeführt.
+ein Mesh zu erzeugen, muss die Punktwolke zuerst bereinigt werden. Dies
+geschieht, indem nicht benötigte Punkte gelöscht und dichte Punktgruppen auf
+einen Punkt zusammengefasst werden. Diese Rausch-Reduzierung verhilft den
+Mesh-Rekon\-struk\-tions-Algorithmen zu besseren Ergebnissen. In unserem Fall wurde
+die Bereinigung von Hand durchgeführt.
+
 Zur Umwandlung einer bereinigten Punktwolke in ein Mesh existieren ebenfalls
-diverse Algorithmen.
-Ein besonders gut geeigneter Algorithmus ist die von Microsoft Research im Jahr
-2006 entwickelte "<Poisson Surface Reconstruction">\cite{kazhdan:2006}.
+diverse Algorithmen. Ein besonders gut geeigneter Algorithmus ist die von
+Microsoft Research im Jahr 2006 entwickelte "<Poisson Surface
+Reconstruction">\cite{kazhdan:2006} Algorithmus.
 
 %----------------------------------------------------------------------------------------
 
@@ -104,11 +105,11 @@ Damit ein Mesh druckbar wird, muss es in ein solides Objekt umgewandelt werden.
 Ein Mesh besteht nur aus einer Oberfläche, ein solides Objekt hinegegen ist
 "<wasserdicht"> und hat ein Volumen. Wichtig bei der Umwandlung ist auch, dass
 das Mesh eine Mannigfaltigkeit (Englisch: Manifold) ist. Das bedeutet unter
-anderem, dass alle Flächen nach Aussen zeigen, dass keine Vertizes oder Kanten
+anderem, dass alle Flächen nach aussen zeigen, dass keine Vertizes oder Kanten
 mehrfach vorhanden sind und dass an jeder Kante zwei Flächen anliegen.
 
 Sind diese Voraussetzungen gegeben, kann ein Mesh mit geeigneter Software in
-einem Solid-Format wie STL\footnote{STereoLithography,
+ein Solid-Format wie STL\footnote{STereoLithography,
 	\url{https://de.wikipedia.org/wiki/STL-Schnittstelle}} exportiert werden.
 
 %----------------------------------------------------------------------------------------
@@ -120,7 +121,7 @@ in druckbare Schichten umgewandelt werden. Dieser Prozess nennt sich "<Slicing">
 und wird in der Regel von der dem 3D-Drucker mitgelieferten Software erledigt.
 %
 \marginpar{G-Code ist ein Steuerungscode für computergesteuerte Maschinen wie
-CNC-Fräsen oder 3D-Drucker. Sie enthält Befehle und Koordinaten um den Druckkopf
+CNC-Fräsen oder 3D-Drucker. Er enthält Befehle und Koordinaten um den Druckkopf
 zu positionieren und das Material zu extrudieren. Auch die Temperatur, die
 Lüfter und weitere Parameter können angesteuert werden.}
 %
