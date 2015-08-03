@@ -1,0 +1,9 @@
+Contents:
+
+- PDF
+- VSFM & all dependencies
+- Raw images
+- Undistorted images
+- Raw mesh
+- Final mesh (Blender)
+- STL file
