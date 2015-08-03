@@ -277,18 +277,47 @@ Unschönheiten auf. Diese müssen nun korrigiert werden. In unserem Fall geschah
 dies von Hand.
 
 Bei diesem Prozess wurden wir zu Beginn von der Firma Drei-De in Rapperswil
-unterstützt. Sie übernahmen das initiale Mesh-Rework.
+unterstützt. Sie übernahmen das initiale Mesh-Rework. Diese Arbeit hätte man
+alternativ auch in MeshLab\footnote{\url{http://meshlab.sourceforge.net/}}
+durchführen können.
 
 Anschliessend haben wir die letzten Korrekturen mit der Software
-Blender\footnote{\url{https://www.blender.org/}} durchgeführt. Dabei haben wir primär
-mit den Modellier-Werkzeugen gearbeitet:
+Blender\footnote{\url{https://www.blender.org/}} durchgeführt.
 
-TODO Screenshots und Erklaerungen
+\subsection{MeshLab}
 
-Das fertige Mesh kann nun unter [TODO welches menu?] ins STL Format exportiert
-werden.
+MeshLab ist eine Software unter der GPL Lizenz, welches zur Ver- und Bearbeitung
+von Meshes benutzt werden kann. Das Programm ist etwas gewöhnungsbedürftig und
+lässt in der Bedienung zu Wünschen übrig, die eingebauten Funktionen sind jedoch
+sehr mächtig.
 
-TODO Screenshot
+\subsection{Blender}
+
+Blender ist ebenfalls freie Software unter der GPL Lizenz. Das Programm kann
+genutzt werden, um dreidimensionale Körper zu modellieren, sie zu texturieren,
+zu animieren und zu rendern. Mit Hilfe von Blender wurden bisher schon mehrere
+Kurzfilme produziert, darunter Sintel (2010, \cite{sintel}), Tears of Steel
+(2012, \cite{tearsofsteel}) und
+weitere\footnote{\url{http://archive.blender.org/features-gallery/movies/}}.
+
+Wir haben primär mit den Modellier-Werkzeugen im sogenannten "<Sculpt Mode"> von
+Blender gearbeitet. Diese sind der Arbeit mit Modelliermasse nachempfunden. Man
+kann beispielsweise rauhe Stellen glätten, hervorstehende Flächen
+"<hineindrücken">, etc. 
+
+In unserem Fall mussten wir vor allem unebene Flächen glätten. Dies kann man mit
+dem "<Flatten/Contrast"> Brush bei gedrückter \texttt{Shift}-Taste einfach
+erledigen.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.4\textwidth]{images/blender_flatten_brush.png}
+	\caption{Der Flatten/Contrast Brush}
+	\label{img:blender_brush}
+\end{figure}
+
+Das fertige Mesh kann nun unter \texttt{File > Export > Stl (.stl)} ins STL
+Format exportiert werden.
 
 %----------------------------------------------------------------------------------------
 
