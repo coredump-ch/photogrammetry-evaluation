@@ -5,9 +5,9 @@
 %----------------------------------------------------------------------------------------
 
 Die folgende Anleitung beschreibt die Installation von
-VisualSFM\footnote{\url{http://ccwu.me/vsfm/}} (nachfolgend VSFM genannt), auf
-einem Computer mit Ubuntu\footnote{\url{http://www.ubuntu.com}} 14.04 LTS
-Betriebssystem und einer CUDA-fähigen nVidia Grafikkarte. CUDA-Unterstützung ist 
+VisualSFM\footnote{\url{http://ccwu.me/vsfm/}} (nachfolgend VSFM genannt) auf
+einem Computer mit Ubuntu\footnote{\url{http://www.ubuntu.com}} 14.04
+Betriebssystem und einer CUDA-fähigen nVidia-Grafikkarte. CUDA-Unterstützung ist
 optional, aber empfohlen.
 
 %----------------------------------------------------------------------------------------
@@ -15,12 +15,13 @@ optional, aber empfohlen.
 \section{Einleitung}
 
 VSFM ist eine GUI-Applikation für 3D-Rekonstruktion mittels "<Structure from
-Motion"> (SFM) Technik. Das Projekt integriert viele Einzelkomponenten welche
-meist von Universitäten entwickelt wurden.
+Motion"> (SFM) Technik. Das Projekt integriert viele Einzelkomponenten, die
+meist von Universitäten entwickelt wurden. Mehr dazu findet sich im
+\autoref{workflow:vsfm}.
 
 \subsection{Abhängigkeiten}
 
-Für den VSFM 3D-Reconstruction Prozess haben wir folgende Bibliotheken verwendet:
+Für den VSFM 3D-Reconstruction Prozess werden folgende Bibliotheken benötigt:
 
 \begin{itemize}
 	\item SiftGPU\footnote{\url{http://www.cs.unc.edu/~ccwu/siftgpu/}}:
@@ -55,15 +56,15 @@ nicht näher betrachtet:
 
 \section{Installation}
 
-Mit dem folgenden Installationsscript kann VSFM automatisch auf einem Ubuntu 14.04
-installiert werden.
+Das folgenden Installationsscript bietet eine Hilfe um VSFM auf einem Ubuntu
+14.04 System zu installieren.
 
-In dieser Version werden alle Abhängigkeiten automatisch aus dem
-Internet heruntergeladen. Sie sind ebenfalls auf der (TODO: CD/Stick/Internet) vorhanden 
-für den Fall, dass die Ressourcen nicht mehr online verfügbar sind. Es wird empfohlen
-nicht das ganze Script auf einmal auszuführen, sondern es Schritt für Schritt durchzugehen.
-Möglicherweise haben sich Systemvoraussetzungen in der Zwischenzeit geändert
-(z.B. nVidia-Treiber).
+Im Script werden alle Abhängigkeiten automatisch aus dem Internet
+heruntergeladen. Sie sind jedoch ebenfalls auf der beiliegenden DVD vorhanden,
+für den Fall dass die Ressourcen nicht mehr online verfügbar sind. Es wird
+empfohlen nicht das ganze Script auf einmal auszuführen, sondern es Schritt für
+Schritt durchzugehen. Möglicherweise haben sich Systemvoraussetzungen in der
+Zwischenzeit geändert (z.B. nVidia-Treiber).
 
 \begin{minted}[bgcolor=tango-bg,frame=lines,framesep=2mm,samepage=true,fontsize=\footnotesize]{bash} 
 # Whole 2D to 3D reconstruction toolchain setup for Ubuntu 14.04 64bit.
