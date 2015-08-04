@@ -1,4 +1,4 @@
-\chapter{Einleitung}
+\chapter{3D-Rekonstruktion Schloss Rapperswil}
 
 %----------------------------------------------------------------------------------------
 
@@ -52,7 +52,7 @@ Mit dem Quadrokopter sind wir dann während einer halben Stunde mehrmals um das
 Schloss herumgeflogen um Fotos von jedem Winkel zu erstellen. Auch den Innehof
 haben wir mit dem Quadrokopter abgeflogen. Anschliessend sind wir noch zu Fuss
 mit der Kamera in der Hand dem Pfad neben dem Schloss gefolgt um auch gutes
-Bildmaterial von innerhalb des Tores zu erhalten.
+Bildmaterial innerhalb des Tores zu erhalten.
 
 \vspace{1\baselineskip}
 
@@ -139,8 +139,8 @@ Linsenprofil für die GoPro 4 gefunden und uns deshalb aus Zeitgründen für
 Lightroom entschieden. Ein Linsenprofil könnte jedoch selber erstellt werden.
 Anleitungen dazu gibt es
 online\footnote{\url{http://hugin.sourceforge.net/tutorials/calibration/en.shtml}}.
-
-TODO: https://github.com/racerxdl/goprocorrect
+Korrektur-Profile für die GoPro 3+ Silver können unter
+\url{https://github.com/racerxdl/goprocorrect} gefunden werden.
 
 %----------------------------------------------------------------------------------------
 
@@ -165,12 +165,11 @@ auf der \autoref{img:pix4d} erkennen kann, wurde die Gasse neben dem Schloss
 der Schlossmauer entlang schräg nach oben geführt. Zudem war im endgültigen
 Ergebnis der Hauptturm doppelt vorhanden, einmal schräg versetzt.
 
-\begin{figure}[H]
-	\centering
+\begin{sidewaysfigure}
 	\includegraphics[width=\textwidth]{images/pix4d.png}
 	\caption{Sparse Point Cloud in Pix4D}
 	\label{img:pix4d}
-\end{figure}
+\end{sidewaysfigure}
 
 Unsere Vermutung ist, dass wir zu viele (teilweise qualitativ nicht
 einwandfreie) Input-Daten verwendet hatten, so dass sich falsche Matches so weit
@@ -220,9 +219,23 @@ Alternativ ist unter Arch Linux die Installation dank Paketen im Arch User
 Repository\footnote{\url{https://aur.archlinux.org/packages/vsfm/}} relativ
 einfach möglich.
 
+Auf \url{https://registry.hub.docker.com/u/ryanfb/visualsfm/} haben wir zudem
+auch noch ein Docker-Image für VSFM gefunden. Angesichts der komplexen
+Installation ist eine Containerisierung sicherlich eine gute Idee. Zum Zeitpunkt
+dieser Dokumentation lief das Image auf unserer Testmaschine jedoch noch nicht
+fehlerfrei.
+
 \subsection{Konfiguration}
 
-TODO: konfigurationsdatei, gpu beschleunigung, etc
+VSFM verfügt über viele versteckte Konfigurationsoptionen in der \texttt{nv.ini}
+Konfigurationsdatei. Diese editiert man am einfachsten, indem man die
+\texttt{CTRL}-Taste gedrückt hält, während man auf das Settings-Icon
+\includegraphics[scale=0.75]{images/vsfm_icon_settings} klickt. Nun sollte sich
+ein Texteditor öffnen. Für einen ersten Versuch sollte jedoch die
+Standard-Konfiguration ausreichen.
+
+Für schnellere Resultate kann man jedoch optional die CUDA-Unterstützung unter
+\texttt{Tools > Enable GPU > Match using CUDA} aktivieren.
 
 \subsection{Vorgehen}
 
@@ -232,7 +245,9 @@ orientiert: \url{https://youtu.be/V4iBb_j6k_g}
 Zuerst haben wir wie im \autoref{sec:image-correction} beschrieben die Fotos
 einer Linsenkorrektur unterzogen. Anschliessend haben wir 571 Bilder für einen
 Testlauf ausgewählt und in VSFM geladen. Bei der Auwahl haben wir darauf
-geachtet, dass jeder Teil des Schlosses darin vertreten ist.
+geachtet, dass jeder Teil des Schlosses darin mehrfach vertreten ist. Auf der
+beiliegenden DVD finden sich die Fotos im Verzeichnis
+\texttt{/beispiel/1\_raw\_images}.
 
 \begin{figure}[H]
 	\centering
@@ -241,9 +256,7 @@ geachtet, dass jeder Teil des Schlosses darin vertreten ist.
 	\label{img:vsm_thumbnails}
 \end{figure}
 
-\noindent Für schnellere Resultate kann man optional die CUDA-Unterstützung unter \texttt{Tools > Enable GPU > Match using CUDA} aktivieren.
-
-Mit einem Klick auf "<Compute Missing Matches">
+\noindent Mit einem Klick auf "<Compute Missing Matches">
 \includegraphics[scale=0.75]{images/vsfm_icon_compute} wird die
 Feature-Erkennung gestartet.
 
