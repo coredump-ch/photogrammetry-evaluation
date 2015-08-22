@@ -49,7 +49,7 @@ Zur Aufzeichnung der GPS-Koordinaten haben wir ein Smartphone mit einer GPS
 Tracking App auf dem Quadrokopter befestigt.
 
 Mit dem Quadrokopter sind wir dann während einer halben Stunde mehrmals um das
-Schloss herumgeflogen um Fotos von jedem Winkel zu erstellen. Auch den Innehof
+Schloss herumgeflogen um Fotos von jedem Winkel zu erstellen. Auch den Innenhof
 haben wir mit dem Quadrokopter abgeflogen. Anschliessend sind wir noch zu Fuss
 mit der Kamera in der Hand dem Pfad neben dem Schloss gefolgt um auch gutes
 Bildmaterial innerhalb des Tores zu erhalten.
@@ -70,6 +70,23 @@ Bildmaterial innerhalb des Tores zu erhalten.
 	\caption{GPS Trace des Quadrokopters während der Erfassung.\\Bildmaterial:
 		\copyright{} OpenStreetMap Contributors}
 	\label{img:gpstrace-mapnik}
+\end{figure}
+
+Ein Video der 3D-Erfassung ist unter \url{https://vimeo.com/118125082}
+verfügbar. Nachfolgend noch zwei Aufnahmen des Quadrokopters:
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{images/drone-pic-1.jpg}
+	\caption{Das Schloss Rapperswil von oben}
+	\label{img:drone-pic-1}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{images/drone-pic-2.jpg}
+	\caption{Das Schloss Rapperswil von oben}
+	\label{img:drone-pic-2}
 \end{figure}
 
 \subsection{Bildqualität}\label{workflow:erfassung:bildqualitaet}
@@ -367,13 +384,14 @@ beeinflusst werden. Wir haben durch Experimentieren zwei verschiedene
 relativ gut funktionierende Einstellungen gefunden:
 
 \begin{itemize}
+	\setlength\itemsep{0.3em}
 	\item \texttt{12, 10, 1, 1}: Viele Details sichtbar
 	\item \texttt{12, 8, 10, 1}: Mehr Glättung, weniger Störungen
 \end{itemize}
 
-Der dritte Parameter, "<Samples per Node">, steht dafür, wie viele Punkte der
-Punktwolke verwendet werden, um einen Vertex im Mesh zu erstellen. Das erklärt
-die Glättung, die damit ersichtlich ist.
+\noindent Der dritte Parameter, "<Samples per Node">, steht dafür, wie viele
+Punkte der Punktwolke verwendet werden, um einen Vertex im Mesh zu erstellen.
+Das erklärt die Glättung, die damit ersichtlich ist.
 
 Hier das Resultat der Rekonstruktion:
 
@@ -432,10 +450,52 @@ Format exportiert werden.
 
 \section{3D-Druck}
 
-TODO
+Für das Slicing (\autoref{photogrammetry:slicing}) des Meshes in ein Modell mit
+ca. 10 cm Kantenlänge haben wir
+Cura\footnote{\url{https://ultimaker.com/en/products/cura-software}} mit
+folgenden Einstellungen verwendet:
+
+\begin{itemize}
+	\setlength\itemsep{0.3em}
+	\item Layer Height: 0.1mm
+	\item Shell Thickness: 0.8mm
+	\item Bottom / Top Thickness: 1.1mm
+	\item Fill Density: 20\%
+	\item Print Speed: 50mm/s
+	\item Support Type: None
+	\item Platform Adhesion Type: Brim
+\end{itemize}
+
+\noindent Damit haben wir mit dem Ultimaker 2 relativ gute Erfahrungen gemacht.
+Der Druckvorgang dauert dabei ca. 11 Stunden.
 
 %----------------------------------------------------------------------------------------
 
 \section{Resultate}
 
-TODO
+Das fertig druckbare 3D-Modell kann unter
+\url{https://www.thingiverse.com/thing:734125} heruntergeladen werden. Ein Video
+des Druckvorganges ist hier verfügbar: \url{https://vimeo.com/122413144}
+
+Nachfolgend noch ein paar Fotos der 3D-gedruckten Resultate:
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{images/castle-printed-1}
+	\caption{3D-Druck des Schlosses}
+	\label{img:castle_printed_1}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{images/castle-printed-2}
+	\caption{3D-Druck des Schlosses}
+	\label{img:castle_printed_2}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{images/castle-printed-3}
+	\caption{3D-Druck des Schlosses}
+	\label{img:castle_printed_3}
+\end{figure}
