@@ -257,29 +257,132 @@ beiliegenden DVD finden sich die Fotos im Verzeichnis
 \end{figure}
 
 \noindent Mit einem Klick auf "<Compute Missing Matches">
-\includegraphics[scale=0.75]{images/vsfm_icon_compute} wird die
+\includegraphics[scale=0.75]{images/vsfm_icon_matches} wird die
 Feature-Erkennung gestartet.
 
-TODO screenshot
+Wenn diese fertig ist, kann mit einem Klick auf "<Compute 3D Reconstruction">
+\includegraphics[scale=0.75]{images/vsfm_icon_compute} die Rekonstruktion der
+Sparse Point Cloud (siehe \autoref{photogrammetry:sparse-point-cloud}) beginnen.
+Man kann diese in Echtzeit überwachen. Das Resultat lässt bereits die Umrisse
+des Schlosses erahnen.
 
-Nun kann mit einem Klick auf TODO die Rekonstruktion der Sparse Point Cloud
-(siehe \autoref{photogrammetry:sparse-point-cloud}) beginnen. Man kann diese in
-Echtzeit überwachen. Das Resultat lässt bereits die Umrisse des Schlosses
-erahnen.
-
-TODO screenshot
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{images/sparse-matrix.jpg}
+	\caption{Sparse Point Cloud in VSFM}
+	\label{img:vsfm_sparse_cloud}
+\end{figure}
 
 Als nächstes folgt die Schwerarbeit: Die Verdichtung der Punktwolke (siehe
-\autoref{photogrammetry:dense-point-cloud}).
+\autoref{photogrammetry:dense-point-cloud}). Dieser Prozess kann mit einem Klick
+auf "<Run Dense Reconstruction">
+\includegraphics[scale=0.75]{images/vsfm_icon_dense} gestartet werden. Er dauert
+mehrere Stunden, das Resultat sah folgendermassen aus:
 
-TODO screenshot
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{images/dense-matrix.jpg}
+	\caption{Dense Point Cloud in VSFM}
+	\label{img:vsfm_dense_cloud}
+\end{figure}
 
 
 %----------------------------------------------------------------------------------------
 
 \section{Mesh-Generierung}
 
-TODO
+\label{workflow:mesh-generating}
+
+Um ein Mesh zu generieren, muss die Punktwolke zuerst bereinigt werden. Wie man
+in der \autoref{img:vsfm_dense_cloud} sehen kann, gibt es um das Schloss herum
+noch viele Artefakte, welche man zuerst löschen muss.
+
+Wir haben für diesen Prozess
+MeshLab\footnote{\url{http://meshlab.sourceforge.net/}} verwendet. MeshLab ist
+eine Software unter der GPL Lizenz, welches zur Ver- und Bearbeitung von Meshes
+benutzt werden kann. Das Programm ist etwas gewöhnungsbedürftig und lässt in der
+Bedienung zu Wünschen übrig, die eingebauten Funktionen sind jedoch sehr
+mächtig.
+
+\subsection{Mesh Öffnen}
+
+Die ersten Probleme tauchten beim Laden der Punktwolke auf. Der Memory-Verbrauch
+von Meshlab ist riesig. Um die 4.5 GiB grosse Punktwolke zu laden, wurden 29 GiB
+RAM gefüllt. Auf unserem Testgerät waren zuerst nur 16 GiB RAM + 8 GiB Swapspace
+vorhanden, was dazu führt, dass MeshLab crasht sobald kein Speicher mehr
+verfügbar ist. Durch Erstellen eines grösseren Swapfiles konnte das Problem
+umgangen werden, die Aufrüstung von RAM ist jedoch die bessere Lösung.
+
+\subsection{Ebenen Kombinieren}
+
+Wenn die Punktwolke in MeshLab geöffnet ist, müssen zuerst die Ebenen kombiniert
+werden. VSFM erstellt die Rekonstruktion in mehreren Clustern, welche auch in
+eigenen \texttt{.ply}-Dateien abgelegt werden. Diese Cluster werden in MeshLab
+als Ebenen geladen. Die Software ermöglicht es leider nicht, Punkte aus mehreren
+Ebenen gleichzeitig zu selektieren, um sie zu löschen. Deshalb müssen die vielen
+Ebenen auf eine einzigen reduziert werden.
+
+Zuerst muss mit \texttt{Ctrl+L} der Layer-Dialog eingeblendet werden. Danach
+kann man mit einem Rechtsklick auf eine beliebigen Ebene die Aktion "<Flatten
+Visible Layers"> auswählen.
+
+Achtung: Beim Kombinieren der Ebenen geht die Textur-Information verloren. In
+unserem Fall war das egal, falls die Texturen erhalten werden müssen, gibt es
+bestimmt eine Lösung für dieses Problem.
+
+\subsection{Punkte Löschen}
+
+Nun kann man die überflüssigen Punkte in der Punktwolke löschen. Dafür klickt
+man in der Toolbar zuerst auf "<Select Vertexes">
+\includegraphics[scale=0.75]{images/meshlab_icon_select}, dann zeichnet man
+einen rechteckigen Bereich über die Punktwolke. Die selektieren Punkte können
+dann mit "<Delete the current set of selected vertices">
+\includegraphics[scale=0.75]{images/meshlab_icon_delete} gelöscht werden.
+
+Ein wichtiger Punkt welcher uns in MeshLab aufgefallen ist: Es gibt keine
+Undo-Funktion! Wenn ein Punkt gelöscht wird, ist er unwiederruflich weg.
+Deshalb sollten beim Bearbeiten von Punktwolken und Meshes alle paar Minuten
+Backups erstellt werden.
+
+\subsection{Mesh Rekonstruieren}
+
+Das Mesh kann nun aus der Punktwolke rekonstruiert werden. MeshLab beinhaltet
+dafür diverse Algorithmen, ein besonders gut geeigneter Algorithmus ist der von
+Microsoft Research im Jahr 2006 entwickelte "<Poisson Surface
+Reconstruction">\cite{kazhdan:2006} Algorithmus.
+
+Dieser kann über das Menu \texttt{Filters > Remeshing, Simplification and
+Reconstruction > Surface Reconstruction: Poisson} gestartet werden. Nun öffnet
+sich ein Dialogfenster:
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.4\textwidth]{images/poisson_dialog.png}
+	\caption{Das Dialogfenster für die Poisson Reconstruction}
+	\label{img:meshlab_poisson_dialog}
+\end{figure}
+
+Durch das Anpassen der Parameter kann das Resultat der Rekonstruktion
+beeinflusst werden. Wir haben durch Experimentieren zwei verschiedene
+relativ gut funktionierende Einstellungen gefunden:
+
+\begin{itemize}
+	\item \texttt{12, 10, 1, 1}: Viele Details sichtbar
+	\item \texttt{12, 8, 10, 1}: Mehr Glättung, weniger Störungen
+\end{itemize}
+
+Der dritte Parameter, "<Samples per Node">, steht dafür, wie viele Punkte der
+Punktwolke verwendet werden, um einen Vertex im Mesh zu erstellen. Das erklärt
+die Glättung, die damit ersichtlich ist.
+
+Hier das Resultat der Rekonstruktion:
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{images/poisson-mesh.png}
+	\caption{Das aus der Poisson Reconstruction resultierende Mesh}
+	\label{img:meshlab_poisson_result}
+\end{figure}
 
 %----------------------------------------------------------------------------------------
 
@@ -291,20 +394,11 @@ Das Mesh ist nun bereit, sieht allerdings noch roh aus und weist viele
 Unschönheiten auf. Diese müssen nun korrigiert werden. In unserem Fall geschah
 dies von Hand.
 
-Bei diesem Prozess wurden wir zu Beginn von der Firma Drei-De in Rapperswil
-unterstützt. Sie übernahmen das initiale Mesh-Rework. Diese Arbeit hätte man
-alternativ auch in MeshLab\footnote{\url{http://meshlab.sourceforge.net/}}
-durchführen können.
+Bei diesem Prozess wurden wir aus Zeitgründen zu Beginn von der Firma Drei-De in
+Rapperswil unterstützt. Sie übernahmen das initiale Mesh-Rework.
 
 Anschliessend haben wir die letzten Korrekturen mit der Software
 Blender\footnote{\url{https://www.blender.org/}} durchgeführt.
-
-\subsection{MeshLab}
-
-MeshLab ist eine Software unter der GPL Lizenz, welches zur Ver- und Bearbeitung
-von Meshes benutzt werden kann. Das Programm ist etwas gewöhnungsbedürftig und
-lässt in der Bedienung zu Wünschen übrig, die eingebauten Funktionen sind jedoch
-sehr mächtig.
 
 \subsection{Blender}
 
