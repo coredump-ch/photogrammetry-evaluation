@@ -119,7 +119,8 @@ Der aktuelle Funktionsumfang beinhaltet als Zielformate Punktwolken,
 Oberflächenmodelle, Texturierte Oberflächenmodelle und Orthofotos. Zudem kann
 OpenDroneMap auch Geodaten aus den EXIF- oder IPTC-Daten der Bilder verwenden.
 Alternativ kann auch eine Datei mit Vollpasspunkten (Englisch: Ground Control
-Points) bereitgestellt werden, welche für die georeferenzierung verwendet wird.
+Points) bereitgestellt werden, welche dann für die georeferenzierung verwendet
+wird.
 
 Um dies zu erreichen, integriert OpenDroneMap viele existierende Open Source
 Libraries wie CMVS, PMVS, Graculus und weitere. Es gibt also eine deutliche
@@ -299,7 +300,8 @@ beispielsweise mit MeshLab geöffnet werden.
 
 \noindent Das untexturierte Mesh kann online unter
 \url{https://sketchfab.com/models/3dd7e0e053054e06b526d2c478253cef} betrachtet
-werden.
+werden. (Die texturierte Variante ist zu gross für einen Gratis-Account auf
+Sketchfab.)
 
 \subsection{Beurteilung der Resultate}
 
@@ -319,9 +321,11 @@ würden:
 		orthorektifiziert: Die Himmelsrichtungen stimmen mit der Ausrichtung des
 		Bildes überein. Für eine korrekte Georeferenzierung müsste man OpenDroneMap
 		eine Liste von Ground Control Points übergeben (siehe
-		\autoref{workflow:hsr:generate}). Dies wird voraussichtlich in einer
-		zukünftigen Version von OpenDroneMap behoben. Alternativ kann man das Bild
-		mit einem Tool wie QGIS\footnote{\url{http://qgis.org/}} georeferenzieren.
+		\autoref{workflow:hsr:generate}). In einer zukünftigen Version von
+		OpenDroneMap wird Georeferenzierung über GPS-Daten noch nachgerüstet
+		werden\footnote{\url{https://github.com/OpenDroneMap/OpenDroneMap/issues/144}}.
+		Alternativ kann man das Bild mit einem Tool wie
+		QGIS\footnote{\url{http://qgis.org/}} georeferenzieren.
 \end{itemize}
 
 %----------------------------------------------------------------------------------------
