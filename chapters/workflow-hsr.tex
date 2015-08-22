@@ -198,13 +198,12 @@ OpenDroneMap verfügt bisher über kein offizielles Docker\-/Image, wir haben
 jedoch das dafür benötigte Dockerfile geschrieben und dem Projekt einen Pull
 Request
 gesendet\footnote{\url{https://github.com/OpenDroneMap/OpenDroneMap/pull/143}}.
-Zum Zeitpunkt dieser Dokumentation war der Pull Request noch nicht gemerged, die
-Funktionalität kann jedoch bereits in unserem Fork von OpenDroneMap getestet
-werden:
+Inzwischen wurde der Pull Request gemerged, daher kann diese Deployment-Methode
+nun sehr einfach getestet werden:
 
 \vspace{0.5\baselineskip}
 \begin{minted}[bgcolor=tango-bg,frame=lines,framesep=2mm,samepage=true,fontsize=\footnotesize]{bash} 
-git clone -b docker https://github.com/coredump-ch/OpenDroneMap
+git clone -b docker https://github.com/OpenDroneMap/OpenDroneMap
 cd OpenDroneMap
 export IMAGES=/absolute/path/to/your/images
 docker build -t opendronemap:latest .
