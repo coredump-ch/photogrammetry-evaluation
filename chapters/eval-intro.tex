@@ -1,0 +1,33 @@
+\chapter{Einleitung}
+
+\label{ch:eval-intro}
+
+%----------------------------------------------------------------------------------------
+
+In diesem Teil der Dokumentation vergleichen wir verschiedene
+Photogrammetrie\-/Lösungen. Berücksichtigt werden folgende Produkte:
+
+\begin{figure}[H]
+	\begin{tabular}[H]{llccl}
+		\toprule
+		\textbf{Name} & \textbf{Lizenz} & \textbf{3D?} & \textbf{Ortho?} & \textbf{Preis} \\
+		\midrule
+		VisualSFM & Teilweise OSS & Ja & Nein & Gratis \\
+		OpenDroneMap & Freie Software & Nein & Ja & Gratis \\
+		Pix4Dmapper Pro & Proprietär & Ja & Ja & 7900CHF \\
+		Agisoft PhotoScan Pro & Proprietär & Ja & Ja & 3499USD \\
+		\bottomrule
+	\end{tabular}
+	\caption{Evaluierte Photogrammetrie-Software}
+	\label{table:eval:software}
+\end{figure}
+
+Für die Evaluation werden zwei Datasets verwendet: Ein Dataset von einem
+Stroh-Hasen in Jona zum Testen der 3D-Rekonstruktion und ein Dataset mit
+Senkrecht-Fotos des HSR-Geländes zum Testen der Orthofoto- und DSM-Generierung.
+
+Verglichen werden dabei die Dauer der Rekonstruktion, die Anzahl der generierten
+Punkte in der Punktwolke, die Anzahl der Vertizes im generierten Mesh und die
+Resultate selbst.
+
+%----------------------------------------------------------------------------------------
