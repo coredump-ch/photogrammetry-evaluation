@@ -8,18 +8,35 @@ In diesem Teil der Dokumentation vergleichen wir verschiedene
 Photogrammetrie\-/Lösungen. Berücksichtigt werden folgende Produkte:
 
 \begin{figure}[H]
-	\begin{tabular}[H]{llccl}
+	\begin{tabularx}{\textwidth}{XXl}
 		\toprule
-		\textbf{Name} & \textbf{Lizenz} & \textbf{3D?} & \textbf{Ortho?} & \textbf{Preis} \\
+		\textbf{Name} & \textbf{Lizenz} & \textbf{Preis} \\
 		\midrule
-		VisualSFM & Teilweise OSS & \ja{} & \nein{} & Gratis \\
-		OpenDroneMap & Freie Software & \nein{} & \ja{} & Gratis \\
-		Pix4Dmapper Pro & Proprietär & \ja{} & \ja{} & 7900 CHF \\
-		Agisoft PhotoScan Pro & Proprietär & \ja{} & \ja{} & 3499 USD \\
+		VisualSFM & Teilweise OSS & Gratis \\
+		OpenDroneMap & Freie Software & Gratis \\
+		Pix4Dmapper Pro & Proprietär & 7900 CHF \\
+		PhotoScan Pro & Proprietär & 3499 USD \\
 		\bottomrule
-	\end{tabular}
-	\caption{Evaluierte Photogrammetrie-Software}
-	\label{table:eval:software}
+	\end{tabularx}
+	\caption{Evaluierte Photogrammetrie-Software: Lizenz / Kosten}
+	\label{table:eval:software-license}
+\end{figure}
+
+\noindent Die Produkte bieten folgenden Funktionsumfang:
+
+\begin{figure}[H]
+	\begin{tabularx}{\textwidth}[H]{Xccc}
+		\toprule
+		\textbf{Name} & \textbf{3D Rekonstruktion} & \textbf{Orthofoto} & \textbf{DSM} \\
+		\midrule
+		VisualSFM & Ja & Nein & Jein \\
+		OpenDroneMap & Nein & Ja & Ja \\
+		Pix4Dmapper Pro & Ja & Ja & Ja \\
+		PhotoScan Pro & Ja & Ja & Ja \\
+		\bottomrule
+	\end{tabularx}
+	\caption{Evaluierte Photogrammetrie-Software: Funktionsumfang}
+	\label{table:eval:software-capabilities}
 \end{figure}
 
 Für die Evaluation werden zwei Datasets verwendet: Ein Dataset von einem
