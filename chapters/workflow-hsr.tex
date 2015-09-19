@@ -125,7 +125,7 @@ Der aktuelle Funktionsumfang beinhaltet als Zielformate Punktwolken,
 Oberflächenmodelle, Texturierte Oberflächenmodelle und Orthofotos. Zudem kann
 OpenDroneMap auch Geodaten aus den EXIF- oder IPTC-Daten der Bilder verwenden.
 Alternativ kann auch eine Datei mit Vollpasspunkten (Englisch: Ground Control
-Points) bereitgestellt werden, welche dann für die georeferenzierung verwendet
+Points) bereitgestellt werden, welche dann für die Georeferenzierung verwendet
 wird.
 
 Um dies zu erreichen, integriert OpenDroneMap viele existierende Open Source
@@ -186,7 +186,7 @@ initialisieren kann, welche dann OpenDroneMap ausführt.
 Der Vorteil davon ist die Isolation des Systemes - wenn man die Software nicht
 mehr benötigt kann man einfach die VM löschen. Zudem läuft die Virtuelle
 Maschine auch auf Systemen die OpenDroneMap nicht unterstützen, wie Windows oder
-OS X. Nachteile ist vor Allem der grosse Overhead der Virtualisierung.
+OS X. Nachteil ist vor Allem der grosse Overhead der Virtualisierung.
 
 \subsection{Docker}
 
@@ -242,7 +242,7 @@ Sehr wichtig ist, dass die Bilder über eine klein geschriebene Dateiendung
 verfügen. Aufgrund eines Bugs in
 OpenDroneMap\footnote{\url{https://github.com/OpenDroneMap/OpenDroneMap/issues/33}}
 können die Bilder ansonsten aktuell nicht verarbeitet werden. Falls die Bilder
-aktuell noch über eine gross geschriebene Endung verfügen, könenn sie mit
+aktuell noch über eine gross geschriebene Endung verfügen, können sie mit
 folgendem Befehl einfach umbenannt werden:
 
 \vspace{0.5\baselineskip}
@@ -251,7 +251,8 @@ for file in *.JPG; do mv "$file" "`basename $file .JPG`.jpg"; done
 \end{minted}
 
 Anschliessend kann OpenDroneMap gestartet werden. Da wir keine Ground Control
-Points bereitstellen, muss noch eine entsprechende Operation mitgegeben werden.
+Points bereitstellen, muss noch die entsprechende Option
+(\texttt{---odm\_georeferencing-useGcp false}) mitgegeben werden.
 
 \vspace{0.5\baselineskip}
 \begin{minted}[bgcolor=tango-bg,frame=lines,framesep=2mm,samepage=true,fontsize=\footnotesize]{bash} 
@@ -290,7 +291,8 @@ Das Orthofoto hat den Namen \texttt{odm\_orthophoto.png}. In unserem Fall war es
 	\label{img:odm_orthophoto}
 \end{figure}
 
-\noindent Wie man sieht, ist das Luftbild orthorektifiziert, d.h. die Rotation
+\noindent Wie man sieht, ist das Luftbild orthorektifiziert, d.h. die
+geometrischen Verzerrungen sind aus den Rohdaten entfernt und die Rotation
 stimmt mit den effekiven Himmelsrichtungen überein. Dies ist dank den
 eingebetteten GPS-Metadaten möglich.
 
