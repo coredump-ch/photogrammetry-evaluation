@@ -215,7 +215,7 @@ diese Hypothese aus Zeitgründen jedoch nicht verifizieren.
 
 \label{workflow:vsfm}
 
-Anstatt uns weiter mit Pix4D herumzuschlagen, haben wir den zweiten Versuch mit
+Nach dem ersten Versuch mit Pix4D haben wir einen zweiten Versuch mit
 VisualSFM\footnote{\url{http://ccwu.me/vsfm/}}\cite{wu:2011}\cite{wu:2015} unter
 Linux gestartet. VisualSFM (Visual Structure From Motion, abgekürzt VSFM) wurde
 von Changchang Wu im Jahr 2011 im Rahmen seines Postdoc Researches als Frontend
@@ -253,7 +253,7 @@ Konfigurationsdatei. Diese editiert man am einfachsten, indem man die
 ein Texteditor öffnen. Für einen ersten Versuch sollte jedoch die
 Standard-Konfiguration ausreichen.
 
-Für schnellere Resultate kann man jedoch optional die CUDA-Unterstützung unter
+Für schnellere Resultate kann man optional die CUDA\-/Unterstützung unter
 \texttt{Tools > Enable GPU > Match using CUDA} aktivieren.
 
 \subsection{Vorgehen}
@@ -263,10 +263,8 @@ orientiert: \url{https://youtu.be/V4iBb_j6k_g}
 
 Zuerst haben wir wie im \autoref{sec:image-correction} beschrieben die Fotos
 einer Linsenkorrektur unterzogen. Anschliessend haben wir 571 Bilder für einen
-Testlauf ausgewählt und in VSFM geladen. Bei der Auwahl haben wir darauf
-geachtet, dass jeder Teil des Schlosses darin mehrfach vertreten ist. Auf der
-beiliegenden DVD finden sich die Fotos im Verzeichnis
-\texttt{/beispiel/1\_raw\_images}.
+Testlauf ausgewählt und in VSFM geladen. Bei der Auswahl haben wir darauf
+geachtet, dass jeder Teil des Schlosses darin mehrfach vertreten ist.
 
 \begin{figure}[H]
 	\centering
@@ -359,9 +357,9 @@ dann mit "<Delete the current set of selected vertices">
 \includegraphics[scale=0.75]{images/meshlab_icon_delete} gelöscht werden.
 
 Ein wichtiger Punkt welcher uns in MeshLab aufgefallen ist: Es gibt keine
-Undo-Funktion! Wenn ein Punkt gelöscht wird, ist er unwiederruflich weg.
-Deshalb sollten beim Bearbeiten von Punktwolken und Meshes alle paar Minuten
-Backups erstellt werden.
+Undo-Funktion! Wenn ein Punkt gelöscht wird, ist er unwiderruflich weg.  Deshalb
+sollten beim Bearbeiten von Punktwolken und Meshes alle paar Minuten Backups
+erstellt werden.
 
 \subsection{Mesh Rekonstruieren}
 
