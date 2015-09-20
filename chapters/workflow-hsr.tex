@@ -320,18 +320,24 @@ Sketchfab.)
 
 \subsection{Beurteilung der Resultate}
 
-Dafür, dass wir OpenDroneMap in der Standardkonfiguration ohne weitere
-Anpassungen über die Bilder haben laufen lassen, sehen die Resultate sehr
-beeindruckend aus. Rückwirkend gäbe es ein paar Dinge, die wir verbessern
-würden:
-
 \begin{itemize}
-	\item Das Orthofoto weist immer noch Lücken auf. Bei einem zweiten Versuch
-		würden wir mehr Bildmaterial sammeln.
-	\item Wir haben rein senkrechte Bilder erstellt. Das reicht zwar für das
-		Orthofoto aus, im texturierten Oberflächenmodell sieht man jedoch viele
-		weisse, unförmige Wände. Dies würde sich durch eine 45$^{\circ}$-Erfassung des
-		Geländes wohl stark verbessern.
+	\item Dafür, dass wir OpenDroneMap in der Standardkonfiguration ohne weitere
+		Anpassungen über die Bilder haben laufen lassen, sehen die Resultate sehr
+		beeindruckend aus. Was jedoch sofort auffällt, ist die unregelmässige
+		Helligkeit des Bildes. Hier fehlt noch etwas Arbeit bei der Normalisierung
+		und Überblendung der Farben und Helligkeit der einzelnen Bilder. Daran wird
+		jedoch bereits
+		gearbeitet.\footnote{\url{https://github.com/OpenDroneMap/OpenDroneMap/issues/81}}
+	\item OpenDroneMap berechnet bisher noch keine Ground Sampling Distance
+		(GSD)\footnote{\url{https://github.com/OpenDroneMap/OpenDroneMap/issues/108}}.
+		Die GSD ist die Distanz zwischen zwei nebeneinanderliegenden Pixel, gemessen
+		auf dem Boden. Das Resultat ist abhängig von der Flughöhe, der Sensorbreite
+		und der Brennweite der Kamera.\\
+		Bei der Software-Evaluation (siehe \autoref{ch:eval-aerial}) haben wir auch
+		ein Orthofoto mit Pix4D generiert; das Resultat wies eine horizontale
+		Auflösung von 20'772 Pixel auf. Bei OpenDroneMap waren es 10'112 Pixel, also
+		knapp die Hälfte. Da Pix4D im Schluss-Report eine GSD von 2.21cm auswies,
+		gehen wir bei OpenDroneMap von einer GSD von ungefähr 5cm aus.
 	\item Das Orthofoto ist nicht georeferenziert, sondern lediglich
 		orthorektifiziert: Die Himmelsrichtungen stimmen mit der Ausrichtung des
 		Bildes überein. Für eine korrekte Georeferenzierung müsste man OpenDroneMap
@@ -343,8 +349,23 @@ würden:
 		QGIS\footnote{\url{http://qgis.org/}} georeferenzieren.
 \end{itemize}
 
+\subsection{Learnings}
+
+Rückblickend gäbe es ein paar Dinge, die wir bei einem zweiten Versuch
+verbessern würden:
+
+\begin{itemize}
+	\item Das Orthofoto weist immer noch Lücken auf. Bei einem zweiten Versuch
+		würden wir mehr Bildmaterial sammeln.
+	\item Wir haben rein senkrechte Bilder erstellt. Das reicht zwar für das
+		Orthofoto aus, im texturierten Oberflächenmodell sieht man jedoch viele
+		weisse, unförmige Wände. Dies würde sich durch eine 45$^{\circ}$-Erfassung des
+		Geländes wohl stark verbessern.
+\end{itemize}
+
 %----------------------------------------------------------------------------------------
 
+\newpage
 \section{Weitere Ressourcen}
 
 Hier listen wir ein paar weitere Ressourcen auf, die wir während unserer Arbeit
