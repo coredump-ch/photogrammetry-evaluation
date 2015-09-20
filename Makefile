@@ -26,5 +26,8 @@ zathura:
 evince:
 	evince $(TARGET) &
 
+compress: $(TARGET)
+	gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/ebook -dNOPAUSE -dBATCH  -dQUIET -sOutputFile=compressed.pdf $(TARGET)
+
 
 # vim: set tabstop=4 shiftwidth=4 noexpandtab:
